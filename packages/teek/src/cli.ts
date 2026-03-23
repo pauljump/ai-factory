@@ -8,7 +8,7 @@ import type { EntityKind } from "./types.js";
 function parseArgs(): { kind: EntityKind; name: string; question: string; list: boolean } {
   const args = process.argv.slice(2);
   let kind: EntityKind = "persona";
-  let name = "travis";
+  let name = "ops-execution";
   let list = false;
   const rest: string[] = [];
 

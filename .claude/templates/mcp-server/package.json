@@ -1,0 +1,27 @@
+{
+  "name": "@pauljump/PROJECT_NAME-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for PROJECT_NAME — exposes data and actions to AI agents",
+  "type": "module",
+  "bin": {
+    "PROJECT_NAME-mcp": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.9",
+    "tsx": "^4.7.0",
+    "@types/node": "^22"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,66 @@
+name: shreyas
+description: Source URLs for Shreyas Doshi persona — product frameworks, LNO, pre-mortems, high agency
+last_updated: 2026-03-18
+
+sources:
+  # Twitter/X Threads
+  - url: https://twitter.com/shreyas/status/1399042778613485578
+    title: "A thread of product management frameworks (master thread)"
+  - url: https://x.com/shreyas/status/1276956836856393728
+    title: "High Agency: what it is, why it's important, how to cultivate it"
+  - url: https://x.com/shreyas/status/1313539331563298817
+    title: "15 principles for product work (learned the hard way)"
+  - url: https://x.com/shreyas/status/1360784465560182788
+    title: "Why product management is hard"
+  - url: https://x.com/shreyas/status/1244810075908128768
+    title: "Good Product Strategy, Bad Product Strategy"
+  - url: https://x.com/shreyas/status/1316573473934696449
+    title: "Most execution problems are really strategy, interpersonal, or culture problems"
+  - url: https://x.com/shreyas/status/1429544548628189186
+    title: "Impact = (Execution ^ Strategy) x Market"
+  - url: https://x.com/shreyas/status/1409893040089559041
+    title: "Opportunity Cost thinking"
+  - url: https://x.com/shreyas/status/1776315870807204218
+    title: "The 3 levels of product work: Impact, Execution, Optics"
+  - url: https://x.com/shreyas/status/1401598910792011776
+    title: "Radical Delegation"
+  - url: https://x.com/shreyas/status/1249039638829793280
+    title: "Good Product Managers, Great Product Managers"
+  - url: https://x.com/shreyas/status/1254064006412656640
+    title: "Product Management in 1 tweet: Low ego. Deep care. High agency."
+
+  # Substack Posts
+  - url: https://shreyasdoshi.substack.com/p/the-product-builders-true-journey
+    title: "The Product Builder's True Journey"
+  - url: https://shreyasdoshi.substack.com/p/why-products-fail
+    title: "Why Products Fail"
+  - url: https://shreyasdoshi.substack.com/p/why-product-sense-is-the-only-product
+    title: "Why Product Sense is the only skill that will matter in the AI age"
+  - url: https://shreyasdoshi.substack.com/p/the-ceiling-is-far-higher-than-you
+    title: "The Ceiling Is Far Higher Than You Think"
+  - url: https://shreyasdoshi.substack.com/p/everything-isnt-meant-for-everyone
+    title: "Everything isn't meant for everyone"
+  - url: https://shreyasdoshi.substack.com/p/the-humility-trap
+    title: "The Humility Trap"
+
+  # Frameworks (Coda docs)
+  - url: https://coda.io/@shreyas/pre-mortems
+    title: "Pre-mortems: Tiger / Paper Tiger / Elephant framework"
+
+  # Podcast Appearances
+  - url: https://www.lennysnewsletter.com/p/episode-3-shreyas-doshi
+    title: "Lenny's Podcast: Pre-mortems, LNO framework, three levels of product work"
+  - url: https://www.lennysnewsletter.com/p/shreyas-doshi-live
+    title: "Lenny's Podcast: 4 questions Shreyas wishes he'd asked sooner"
+  - url: https://fs.blog/knowledge-project-podcast/shreyas-doshi/
+    title: "The Knowledge Project #175 with Shane Parrish"
+  - url: https://www.thetwentyminutevc.com/shreyas-doshi
+    title: "20VC: Three types of product leaders, table stakes vs. wow features"
+
+  # Other
+  - url: https://shreyasdoshi.com/writing/
+    title: "Shreyas Doshi's writing page"
+  - url: https://shreyasdoshi.substack.com/archive
+    title: "Substack archive"
+  - url: https://www.opinionx.co/blog/shreyas-doshi-cpsr
+    title: "Customer Problems Stack Rank (CPSR) framework"

@@ -1,0 +1,72 @@
+name: benthomp
+description: Source URLs for BenThomp persona — Stratechery articles and framework pieces
+last_updated: 2026-03-18
+
+sources:
+  # Core Frameworks
+  - url: https://stratechery.com/2015/aggregation-theory/
+    title: "Aggregation Theory"
+  - url: https://stratechery.com/2017/defining-aggregators/
+    title: "Defining Aggregators"
+  - url: https://stratechery.com/2019/shopify-and-the-power-of-platforms/
+    title: "Shopify and the Power of Platforms"
+  - url: https://stratechery.com/2019/the-end-of-the-beginning/
+    title: "The End of the Beginning"
+  - url: https://stratechery.com/2015/the-smiling-curve/
+    title: "The Smiling Curve"
+  - url: https://stratechery.com/2017/the-great-unbundling/
+    title: "The Great Unbundling"
+
+  # Aggregation Theory Applied
+  - url: https://stratechery.com/2016/the-fang-playbook/
+    title: "The FANG Playbook"
+  - url: https://stratechery.com/2018/the-bill-gates-line/
+    title: "The Bill Gates Line"
+  - url: https://stratechery.com/2020/the-anti-amazon-alliance/
+    title: "The Anti-Amazon Alliance"
+  - url: https://stratechery.com/2021/sovereign-writers/
+    title: "Sovereign Writers"
+
+  # Integration and Modularization
+  - url: https://stratechery.com/2018/techs-two-philosophies/
+    title: "Tech's Two Philosophies"
+  - url: https://stratechery.com/2016/cars-and-the-future/
+    title: "Cars and the Future"
+  - url: https://stratechery.com/2020/apple-and-facebook/
+    title: "Apple and Facebook"
+  - url: https://stratechery.com/2013/obsoletive/
+    title: "Obsoletive"
+
+  # Bundling and Unbundling
+  - url: https://stratechery.com/2017/the-great-unbundling/
+    title: "The Great Unbundling"
+  - url: https://stratechery.com/2020/dithering-and-the-open-web/
+    title: "Dithering and the Open Web"
+
+  # Christensen / Disruption Critiques
+  - url: https://stratechery.com/2015/netflix-and-the-conservation-of-attractive-profits/
+    title: "Netflix and the Conservation of Attractive Profits"
+  - url: https://stratechery.com/2016/the-clayton-christensen-disruption-window/
+    title: "The Clayton Christensen Disruption Window"
+  - url: https://stratechery.com/2020/the-relentless-jeff-bezos/
+    title: "The Relentless Jeff Bezos"
+
+  # Media and Distribution
+  - url: https://stratechery.com/2014/publishers-smiling-curve/
+    title: "Publishers and the Smiling Curve"
+  - url: https://stratechery.com/2015/popping-the-publishing-bubble/
+    title: "Popping the Publishing Bubble"
+  - url: https://stratechery.com/2021/internet-30/
+    title: "Internet 3.0"
+
+  # Regulation and Policy
+  - url: https://stratechery.com/2019/where-warrens-wrong/
+    title: "Where Warren's Wrong"
+  - url: https://stratechery.com/2020/antitrust-politics-and-interfaces/
+    title: "Antitrust, Politics, and Interfaces"
+
+  # AI (emerging framework)
+  - url: https://stratechery.com/2023/ai-and-the-big-five/
+    title: "AI and the Big Five"
+  - url: https://stratechery.com/2024/the-ai-value-chain/
+    title: "The AI Value Chain"

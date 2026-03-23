@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+build/
+.next/
+*.xcarchive
+DerivedData/
+
+# Environment & secrets — NEVER commit these
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.*.example
+!.env.*.sample
+!.env.template
+!.env.*.template
+credentials.json
+credentials.db
+*-service-account*.json
+*-credentials*.json
+*.key
+*.pem
+.gcloud/
+
+# Logs
+.handoffs/logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Databases (local dev)
+*.db
+*.sqlite
+*.sqlite3
+
+# iOS
+*.ipa
+*.xcuserdata/
+*.xcworkspace/
+xcuserdata/
+
+# Scrappify — code yes, data no
+scrappify/data/
+scrappify/archive/
+scrappify/staging/
+scrappify/ghost_stores/
+scrappify/*.db
+scrappify/*.db-shm
+scrappify/*.db-wal
+orchard/api/orchard.db-shm
+orchard/api/orchard.db-wal
+
+# SQLite WAL files (all projects)
+*.db-shm
+*.db-wal
+
+# Next.js generated type declarations
+next-env.d.ts

@@ -1,0 +1,66 @@
+name: karp
+description: Source URLs for Alex Karp persona — shareholder letters, interviews, The Technological Republic
+last_updated: 2026-03-18
+
+sources:
+  # Shareholder Letters (primary written sources — personally drafted, never edited by comms)
+  - url: https://www.palantir.com/newsroom/letters/direct-listing-letter/
+    title: "Direct Listing Letter (2020)"
+  - url: https://www.palantir.com/newsroom/letters/letter-to-shareholders/november-7-2022/en/
+    title: "Q3 2022 Letter to Shareholders"
+  - url: https://www.palantir.com/newsroom/letters/2022-annual-letter/
+    title: "2022 Annual Letter from CEO Alex Karp"
+  - url: https://www.palantir.com/newsroom/letters/letter-to-shareholders/may-8-2023/en/
+    title: "Q1 2023 Letter to Shareholders"
+  - url: https://www.palantir.com/newsroom/letters/letter-to-shareholders/august-7-2023/en/
+    title: "Q2 2023 Letter to Shareholders"
+  - url: https://www.palantir.com/q1-2024-letter/en/
+    title: "Q1 2024 Letter to Shareholders"
+  - url: https://www.palantir.com/q2-2024-letter/en/
+    title: "Q2 2024 Letter to Shareholders"
+  - url: https://www.palantir.com/q3-2024-letter/en/
+    title: "Q3 2024 Letter to Shareholders"
+  - url: https://www.palantir.com/q4-2024-letter/en/
+    title: "Q4 2024 Letter to Shareholders"
+  - url: https://www.palantir.com/q1-2025-letter/en/
+    title: "Q1 2025 Letter to Shareholders"
+  - url: https://www.palantir.com/q2-2025-letter/en/
+    title: "Q2 2025 Letter to Shareholders"
+  - url: https://www.palantir.com/q3-2025-letter/
+    title: "Q3 2025 Letter to Shareholders"
+  - url: https://www.palantir.com/q4-2025-letter/
+    title: "Q4 2025 Letter to Shareholders"
+  - url: https://www.palantir.com/newsroom/letters/
+    title: "Full Letters Archive"
+
+  # Book
+  - url: https://techrepublicbook.com/
+    title: "The Technological Republic: Hard Power, Soft Belief, and the Future of the West"
+
+  # Major Interviews and Speeches
+  - url: https://www.sourcery.vc/p/breaking-inside-palantir-w-ceo-alex
+    title: "Sourcery Podcast: Inside Palantir w/ CEO Alex Karp"
+  - url: https://fortune.com/2025/10/16/palantir-ceo-alex-karp-interview-shareholder-letters/
+    title: "Fortune: How Palantir's CEO forged a connection with investors by writing spicy shareholder letters"
+  - url: https://fortune.com/2025/12/03/alex-karp-dyslexia-palantir-success/
+    title: "Fortune: Alex Karp credits his dyslexia for Palantir's $415 billion success"
+  - url: https://www.weforum.org/videos/davos-am23-a-conversation-with-alex-karp-ceo-of-palantir-english/
+    title: "World Economic Forum Davos 2023"
+  - url: https://www.thevccorner.com/p/alex-karp-palantir-500b-interview-lessons
+    title: "The VC Corner: How Palantir Hit $500B Market Cap"
+  - url: https://www.schumer.senate.gov/imo/media/doc/Alex%20Karp%20-%20Statement.pdf
+    title: "Written Statement for Senate AI Insight Forum on National Security"
+
+  # Analysis
+  - url: https://medium.com/@thevalleylife/core-concepts-of-the-technological-republic-by-alex-karp-palantir-ceo-9735918cd573
+    title: "Medium: Core Concepts of the Technological Republic"
+  - url: https://quartr.com/insights/business-philosophy/alex-karp-the-unconventional-tech-visionary
+    title: "Quartr: Alex Karp — The Unconventional Tech Visionary"
+  - url: https://stanfordreview.org/alex-karps-the-technological-republic-stanford-has-lost-its-way/
+    title: "Stanford Review: The Technological Republic"
+  - url: https://kristindemontfort.substack.com/p/alex-karps-aggression-in-the-lebenswelt
+    title: "Karp's Dissertation Analysis"
+
+  # SEC Filing
+  - url: https://www.sec.gov/Archives/edgar/data/1321655/000119312520230013/d904406ds1.htm
+    title: "Palantir S-1 Filing"

@@ -1,0 +1,78 @@
+name: collison
+description: Source URLs for Collison persona — personal site pages, essays, interviews, talks
+last_updated: 2026-03-18
+
+sources:
+  # patrickcollison.com — Core Pages
+  - url: https://patrickcollison.com/fast
+    title: "Fast — examples of large projects completed surprisingly quickly"
+  - url: https://patrickcollison.com/questions
+    title: "Questions — open questions about growth, science, cities, and progress"
+  - url: https://patrickcollison.com/bookshelf
+    title: "Bookshelf — wide-ranging reading list (hundreds of titles)"
+  - url: https://patrickcollison.com/advice
+    title: "Advice — advice for 10-20 year olds"
+  - url: https://patrickcollison.com/growth
+    title: "Growth — reading list on economic growth"
+  - url: https://patrickcollison.com/pollution
+    title: "Pollution — reading list on pollution and environmental health"
+  - url: https://patrickcollison.com/labs
+    title: "Labs — the great research labs and what made them work"
+  - url: https://patrickcollison.com/svhistory
+    title: "SV History — history of Silicon Valley"
+  - url: https://patrickcollison.com/blog
+    title: "Blog — occasional longer essays"
+
+  # Co-Authored Essays
+  - url: https://www.theatlantic.com/science/archive/2019/07/we-need-new-science-progress/594946/
+    title: "We Need a New Science of Progress (The Atlantic, 2019 — with Tyler Cowen)"
+  - url: https://worksinprogress.co/
+    title: "Works in Progress (magazine co-inspired by Progress Studies movement)"
+
+  # Fast Grants and Science Reform
+  - url: https://fastgrants.org/
+    title: "Fast Grants — rapid science funding ($40M+, 48-hour decisions)"
+  - url: https://arcinstitute.org/
+    title: "Arc Institute — reforming how science gets funded and organized"
+  - url: https://www.theatlantic.com/ideas/archive/2021/07/fast-grants-pandemic/619538/
+    title: "Fast Grants and the Broken Science Funding System (The Atlantic)"
+
+  # Stripe — Founding and Philosophy
+  - url: https://stripe.com/blog/payment-api-design
+    title: "Stripe Blog — API design philosophy"
+  - url: https://stripe.com/blog
+    title: "Stripe Blog (early posts on developer experience and payments infrastructure)"
+  - url: https://stripe.com/press
+    title: "Stripe Press — book publisher (economics, progress, science)"
+
+  # Talks and Interviews
+  - url: https://conversationswithtyler.com/episodes/patrick-collison/
+    title: "Conversations with Tyler — Patrick Collison (economic growth, reading, speed)"
+  - url: https://www.youtube.com/watch?v=VuSAHJEVl3c
+    title: "Patrick Collison on Lex Fridman Podcast (Stripe, progress, science)"
+  - url: https://www.youtube.com/watch?v=g77FaI3pbIw
+    title: "Patrick Collison — How to Build the Future (Y Combinator)"
+  - url: https://www.youtube.com/watch?v=QYkjOQmGUCo
+    title: "Patrick Collison at Slush — on speed, science, and building"
+  - url: https://tim.blog/2018/12/20/patrick-collison/
+    title: "Patrick Collison on The Tim Ferriss Show (reading, Stripe, Fast Grants)"
+  - url: https://www.joincolossus.com/episodes/15553828/collison-growing-the-gdp-of-the-internet
+    title: "Invest Like the Best — Growing the GDP of the Internet"
+
+  # Analysis and Profiles
+  - url: https://www.wired.com/story/stripe-payments-patrick-john-collison/
+    title: "How Stripe Built One of Silicon Valley's Most Valuable Companies (Wired)"
+  - url: https://www.forbes.com/profile/patrick-collison/
+    title: "Forbes Profile — Patrick Collison"
+  - url: https://www.newyorker.com/magazine/2022/12/05/the-promise-of-progress-studies
+    title: "The Promise of Progress Studies (New Yorker — Collison + Cowen movement)"
+
+  # Stripe Press Books (curated, reflects intellectual values)
+  - url: https://press.stripe.com/poor-charlies-almanack
+    title: "Poor Charlie's Almanack (Stripe Press — Munger, multidisciplinary thinking)"
+  - url: https://press.stripe.com/the-dream-machine
+    title: "The Dream Machine (Stripe Press — Licklider, computing history)"
+  - url: https://press.stripe.com/stubborn-attachments
+    title: "Stubborn Attachments (Stripe Press — Tyler Cowen on economic growth as moral imperative)"
+  - url: https://press.stripe.com/an-elegant-puzzle
+    title: "An Elegant Puzzle (Stripe Press — Will Larson on engineering management)"

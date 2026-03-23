@@ -1,0 +1,82 @@
+name: chesky
+description: Source URLs for Chesky persona — design-led company, 11-star experience, belonging, AI-native product
+last_updated: 2026-03-18
+
+sources:
+  # Core Frameworks — Talks & Interviews
+  - url: https://mastersofscale.com/brian-chesky/
+    title: "Masters of Scale — Handcrafted (do things that don't scale, 11-star experience)"
+  - url: https://www.lennysnewsletter.com/p/brian-cheskys-contrarian-approach
+    title: "Lenny's Podcast — Contrarian Approach to Product (founder mode, functional org)"
+  - url: https://config.figma.com/video/brian-chesky-design-the-company
+    title: "Figma Config 2023 — Design the Company (design as organizing principle)"
+  - url: https://startuparchive.org/post/brian-chesky-on-the-7-star-experience
+    title: "The 11-Star Experience Framework (escalate from adequate to absurd)"
+
+  # AI Strategy
+  - url: https://skift.com/2025/09/10/airbnbs-brian-chesky-ai-opens-new-markets/
+    title: "Skift — Chesky: AI Opens New Markets (applied AI, proprietary data moat)"
+  - url: https://skift.com/2026/02/12/chesky-disses-rivals-chatbots/
+    title: "Skift — Chesky Disses Rivals' Chatbots (anti-chatbot, concierge vision)"
+  - url: https://fortune.com/2025/11/14/brian-chesky-airbnb-ai-holy-grail/
+    title: "Fortune — Chesky: AI Is Airbnb's Holy Grail (specialization wins)"
+
+  # Design Method — Storyboarding & Experience
+  - url: https://www.fastcompany.com/3029172/airbnb-snow-white-storyboarding
+    title: "Fast Company — How Airbnb Uses Snow White Storyboarding"
+  - url: https://9to5mac.com/2025/10/01/jony-ive-brian-chesky-partnership/
+    title: "9to5Mac — Jony Ive and Chesky Partnership (design philosophy alignment)"
+
+  # Vision & Philosophy
+  - url: https://medium.com/@bchesky/belong-anywhere
+    title: "Belong Anywhere (Chesky's founding essay on belonging as core product)"
+  - url: https://news.airbnb.com/open-letter-21st-century-company/
+    title: "An Open Letter: A 21st Century Company (company as community, not family)"
+
+  # TED & Conversations
+  - url: https://www.ted.com/talks/brian_chesky_i_thought_i_was_a_terrible_ceo_then_i_read_this
+    title: "TED with Adam Grant — Rethinking Leadership (founder mode, staying close to product)"
+
+  # Founder Mode & Organizational Design
+  - url: https://paulgraham.com/foundermode.html
+    title: "Paul Graham — Founder Mode (inspired by Chesky's talk at YC event)"
+
+  # Pandemic & Crisis Leadership
+  - url: https://news.airbnb.com/a-message-from-co-founder-and-ceo-brian-chesky/
+    title: "Chesky's Pandemic Letter to Employees (crisis communication, layoff transparency)"
+
+  # Shareholder Letters & Public Communication
+  - url: https://news.airbnb.com/2022-letter-to-stakeholders/
+    title: "2022 Letter to Stakeholders (design-led company, functional structure, efficiency)"
+  - url: https://news.airbnb.com/2023-letter-to-stakeholders/
+    title: "2023 Letter to Stakeholders (AI roadmap, experience not features)"
+
+  # Podcast Deep Dives
+  - url: https://www.youtube.com/watch?v=W608u6sBFpo
+    title: "Reid Hoffman & Chesky — Blitzscaling (early Airbnb, growth vs. craft tension)"
+  - url: https://www.youtube.com/watch?v=6yqgsWaVbhk
+    title: "Chesky at Startup School — Designing a Company (culture as product)"
+  - url: https://www.youtube.com/watch?v=RfWgVWGEXZA
+    title: "Chesky on How to Launch (product launches as storytelling)"
+
+  # Interviews & Profiles
+  - url: https://www.wired.com/story/brian-chesky-airbnb-ceo-interview/
+    title: "Wired — Chesky Interview (post-pandemic reinvention, design philosophy)"
+  - url: https://www.fastcompany.com/90904578/brian-chesky-airbnb-most-innovative-companies-2023
+    title: "Fast Company — Most Innovative Companies 2023 (functional org results)"
+  - url: https://time.com/collection/time100-companies-2022/6159456/airbnb/
+    title: "TIME 100 — Airbnb (company profile, belonging thesis)"
+
+  # RISD & Design Background
+  - url: https://www.risd.edu/news/stories/brian-chesky-commencement-2015
+    title: "RISD Commencement 2015 — Chesky on Design Education and Entrepreneurship"
+
+  # Experience Strategy
+  - url: https://www.airbnb.com/d/experiences-launch
+    title: "Airbnb Experiences Launch (trip experiences as product extension)"
+  - url: https://news.airbnb.com/2024-winter-release/
+    title: "2024 Winter Release (AI-powered features, guest favorites, experience redesign)"
+
+  # Additional
+  - url: https://www.youtube.com/watch?v=V-B0Qhqmsgg
+    title: "Chesky — How Design Runs Airbnb (SXSW, functional org deep dive)"

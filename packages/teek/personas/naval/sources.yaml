@@ -1,0 +1,64 @@
+name: naval
+description: Source URLs for Naval Ravikant persona — nav.al blog, Almanack, interviews
+last_updated: 2026-03-18
+
+sources:
+  # nav.al Blog Posts / Podcast Essays
+  - url: https://nav.al/rich
+    title: "How to Get Rich (without getting lucky)"
+  - url: https://nav.al/ai
+    title: "A Motorcycle for the Mind"
+  - url: https://nav.al/curate-people
+    title: "Curate People"
+  - url: https://nav.al/in-the-arena
+    title: "In the Arena"
+  - url: https://nav.al/simplest
+    title: "Find the Simplest Thing That Works"
+  - url: https://nav.al/good-products
+    title: "Good Products Are Hard to Vary"
+  - url: https://nav.al/density
+    title: "The Best Authors Respect the Reader's Time"
+  - url: https://nav.al/get
+    title: "Most Books Should Be Skimmed, A Few Should Be Devoured"
+  - url: https://nav.al/fool
+    title: "It Is Impossible to Fool Mother Nature"
+  - url: https://nav.al/agency
+    title: "Blame Yourself for Everything, and Preserve Your Agency"
+  - url: https://nav.al/reflect
+    title: "Pause, Reflect, See How Well It Did"
+  - url: https://nav.al/specific-knowledge
+    title: "Specific Knowledge"
+  - url: https://nav.al/judgment
+    title: "Judgment"
+  - url: https://nav.al/accountability
+    title: "Accountability"
+  - url: https://nav.al/happiness
+    title: "Happiness"
+  - url: https://nav.al/finding-time
+    title: "Finding Time / Renting Your Time"
+  - url: https://nav.al/principal-agent
+    title: "Principal-Agent Problem"
+
+  # The Almanack of Naval Ravikant
+  - url: https://www.navalmanack.com
+    title: "The Almanack of Naval Ravikant (full book)"
+  - url: https://www.navalmanack.com/almanack-of-naval-ravikant/table-of-contents
+    title: "Almanack Table of Contents"
+  - url: https://www.navalmanack.com/almanack-of-naval-ravikant/understanding-how-wealth-is-created
+    title: "Understanding How Wealth Is Created"
+  - url: https://www.navalmanack.com/almanack-of-naval-ravikant/choosing-to-be-yourself
+    title: "Choosing to Be Yourself"
+
+  # Original Tweetstorm
+  - url: https://x.com/naval/status/1002103360646823936
+    title: "How to Get Rich (original 39-tweet thread)"
+
+  # Key Interviews
+  - url: https://www.youtube.com/watch?v=3qHkcs3kG44
+    title: "Joe Rogan Experience #1309 — Naval Ravikant"
+  - url: https://tim.blog/naval-ravikant-on-the-tim-ferriss-show-transcript/
+    title: "Tim Ferriss Show #97 and #136 — Naval Ravikant"
+  - url: https://tim.blog/2020/01/16/naval-ravikant-on-happiness/
+    title: "Naval on How to Be Happy (Tim Ferriss)"
+  - url: https://fs.blog/knowledge-project-podcast/naval-ravikant/
+    title: "Knowledge Project #18 — Naval Ravikant (Shane Parrish)"

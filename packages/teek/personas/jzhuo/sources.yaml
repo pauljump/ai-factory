@@ -1,0 +1,60 @@
+name: jzhuo
+description: Source URLs for JZhuo persona — design leadership, obviousness, user empathy, conversational UI
+last_updated: 2026-03-18
+
+sources:
+  # Core Frameworks — The Looking Glass (Substack)
+  - url: https://lg.substack.com/p/conversational-interfaces-the-good
+    title: "Conversational Interfaces: The Good, The Bad, and The Five Problems"
+  - url: https://lg.substack.com/p/the-looking-glass-higher-level-design
+    title: "Higher-Level Design Challenges (5 levels of design maturity)"
+  - url: https://lg.substack.com/p/the-looking-glass-sharpening-judgement
+    title: "Sharpening Judgement (Decision Model + Data Richness + Clarity of Mind)"
+  - url: https://lg.substack.com/p/when-ai-has-better-taste-than-you
+    title: "When AI Has Better Taste Than You (taste as pattern recognition + movement making)"
+  - url: https://lg.substack.com/p/the-death-of-product-development
+    title: "The Death of Product Development (what AI changes about how we build)"
+  - url: https://lg.substack.com/p/the-looking-glass-the-paradoxes-of
+    title: "The Paradoxes of Being a Good Manager"
+
+  # Growth & Understanding
+  - url: https://lg.substack.com/p/what-excellent-growth-teams-see-that
+    title: "What Excellent Growth Teams See That Others Don't (growth through understanding)"
+  - url: https://lg.substack.com/p/the-looking-glass-our-souls-need
+    title: "Our Souls Need Proof of Work (Ikea Effect, intentional effort, agency)"
+
+  # Career & Identity
+  - url: https://lg.substack.com/p/the-making-of-a-founder
+    title: "The Making of a Founder (from VP to startup co-founder)"
+  - url: https://medium.com/the-year-of-the-looking-glass/how-to-think-about-your-career-abf5300eba08
+    title: "How to Think About Your Career (Medium)"
+
+  # Management & Leadership (HBR + Book)
+  - url: https://hbr.org/2019/03/as-your-team-gets-bigger-your-leadership-style-has-to-adapt
+    title: "As Your Team Gets Bigger, Your Leadership Style Has to Adapt (HBR)"
+
+  # Additional Looking Glass Posts
+  - url: https://lg.substack.com/p/the-looking-glass-building-products
+    title: "Building Products That Feel Obvious"
+  - url: https://lg.substack.com/p/the-looking-glass-what-i-think-about
+    title: "What I Think About When I Think About Design"
+  - url: https://lg.substack.com/p/the-looking-glass-data-and-intuition
+    title: "Data and Intuition (complements, not competitors)"
+  - url: https://lg.substack.com/p/the-looking-glass-good-design
+    title: "Good Design (what separates good from great)"
+  - url: https://lg.substack.com/p/how-to-be-a-better-decision-maker
+    title: "How to Be a Better Decision Maker"
+  - url: https://lg.substack.com/p/the-looking-glass-the-agony-and-ecstasy
+    title: "The Agony and Ecstasy of Building Products"
+  - url: https://lg.substack.com/p/unintuitive-things-i-learned-about
+    title: "Unintuitive Things I Learned About Management"
+
+  # Medium (Earlier Writing)
+  - url: https://medium.com/the-year-of-the-looking-glass/the-two-ways-of-building-ddc1587cb3f6
+    title: "The Two Ways of Building"
+  - url: https://medium.com/the-year-of-the-looking-glass/junior-designers-vs-senior-designers-fbe483d3b51e
+    title: "Junior Designers vs. Senior Designers"
+  - url: https://medium.com/the-year-of-the-looking-glass/a-managers-manifesto-be5f6b118084
+    title: "A Manager's Manifesto"
+  - url: https://medium.com/the-year-of-the-looking-glass/how-to-work-with-designers-a-cheat-sheet-for-engineers-and-pms-a68a5bf515c7
+    title: "How to Work With Designers (cheat sheet for engineers and PMs)"

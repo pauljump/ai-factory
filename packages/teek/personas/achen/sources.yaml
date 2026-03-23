@@ -1,0 +1,78 @@
+name: achen
+description: Source URLs for AChen persona — andrewchen.com blog, substack, book
+last_updated: 2026-03-18
+
+sources:
+  # The Cold Start Problem (Book Frameworks)
+  - url: https://andrewchen.com/the-cold-start-problem-how-to-start-and-scale-network-effects/
+    title: "The Cold Start Problem — How to Start and Scale Network Effects"
+  - url: https://andrewchen.com/the-cold-start-problem-five-stages/
+    title: "The Five Stages of Network Effects (Cold Start framework)"
+  - url: https://andrewchen.com/atomic-network/
+    title: "The Atomic Network — Smallest Group That Makes a Product Work"
+  - url: https://andrewchen.com/the-hard-side-of-network-effects/
+    title: "The Hard Side of Network Effects"
+  - url: https://andrewchen.com/escape-velocity/
+    title: "Escape Velocity — When Network Effects Compound"
+
+  # Growth Frameworks
+  - url: https://andrewchen.com/the-next-feature-fallacy/
+    title: "The Next Feature Fallacy"
+  - url: https://andrewchen.com/the-adjacent-user-theory/
+    title: "Adjacent User Theory"
+  - url: https://andrewchen.com/power-user-curve/
+    title: "The Power User Curve (L30 DAU/MAU histogram)"
+  - url: https://andrewchen.com/the-law-of-shitty-clickthroughs/
+    title: "The Law of Shitty Clickthroughs"
+  - url: https://andrewchen.com/paid-marketing-addiction/
+    title: "Why Paid Marketing Sucks (and What to Do Instead)"
+  - url: https://andrewchen.com/whats-your-viral-loop/
+    title: "What's Your Viral Loop? Understanding the Engine of Adoption"
+  - url: https://andrewchen.com/investor-metrics-deck/
+    title: "Investor Metrics — What to Put in Your Deck"
+
+  # Retention and Engagement
+  - url: https://andrewchen.com/new-data-shows-why-losing-80-of-mobile-users-is-normal/
+    title: "New Data Shows Losing 80% of Mobile Users Is Normal"
+  - url: https://andrewchen.com/dau-mau-is-an-important-metric/
+    title: "DAU/MAU Is an Important Metric to Measure Engagement"
+  - url: https://andrewchen.com/how-to-know-if-youve-got-product-market-fit/
+    title: "How to Know If You've Got Product-Market Fit"
+  - url: https://andrewchen.com/why-consumer-product-metrics-are-all-terrible/
+    title: "Why Consumer Product Metrics Are All Terrible"
+
+  # Network Effects and Marketplaces
+  - url: https://andrewchen.com/why-investors-dont-fund-dating/
+    title: "Why Investors Don't Fund Dating Apps"
+  - url: https://andrewchen.com/uber-growth-teardown/
+    title: "How Uber Grew (Growth Teardown)"
+  - url: https://andrewchen.com/when-network-effects-backfire/
+    title: "When Network Effects Backfire"
+  - url: https://andrewchen.com/the-tipping-point-for-network-effects/
+    title: "The Tipping Point for Network Effects"
+
+  # Distribution and Channels
+  - url: https://andrewchen.com/growth-is-the-new-sales/
+    title: "Growth Is the New Sales"
+  - url: https://andrewchen.com/the-product-is-the-distribution/
+    title: "The Product Is the Distribution"
+  - url: https://andrewchen.com/why-its-hard-to-build-consumer-apps/
+    title: "Why It's Hard to Build Consumer Apps"
+  - url: https://andrewchen.com/how-to-build-a-growth-team/
+    title: "How to Build a Growth Team"
+
+  # Startups and Product-Market Fit
+  - url: https://andrewchen.com/after-product-market-fit/
+    title: "After Product-Market Fit — What Comes Next?"
+  - url: https://andrewchen.com/zero-to-productmarket-fit/
+    title: "Zero to Product-Market Fit"
+  - url: https://andrewchen.com/how-to-start-a-marketplace/
+    title: "How to Start a Marketplace"
+
+  # a16z / Substack
+  - url: https://andrewchen.substack.com/p/10x-is-easier-than-2x
+    title: "10x Is Easier Than 2x"
+  - url: https://andrewchen.substack.com/p/the-3-types-of-network-effects
+    title: "The 3 Types of Network Effects"
+  - url: https://andrewchen.substack.com/p/the-most-common-mistake-in-growth
+    title: "The Most Common Mistake in Growth"

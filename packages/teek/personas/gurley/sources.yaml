@@ -1,0 +1,72 @@
+name: gurley
+description: Source URLs for Gurley persona — marketplace economics, revenue quality, take rate discipline
+last_updated: 2026-03-18
+
+sources:
+  # Core Frameworks
+  - url: https://abovethecrowd.com/2011/05/24/all-revenue-is-not-created-equal/
+    title: "All Revenue Is Not Created Equal (10 factors for 10x revenue multiples)"
+  - url: https://abovethecrowd.com/2013/04/18/a-rake-too-far/
+    title: "A Rake Too Far (take rate discipline — why lower rakes build stronger platforms)"
+  - url: https://abovethecrowd.com/2014/07/11/how-to-miss-by-a-mile/
+    title: "How to Miss By a Mile (TAM expansion — anchoring to incumbents is the mistake)"
+  - url: https://abovethecrowd.com/2012/11/13/all-markets-are-not-created-equal/
+    title: "All Markets Are Not Created Equal (10 marketplace factors)"
+  - url: https://abovethecrowd.com/2012/09/04/the-dangerous-seduction-of-the-lifetime-value-ltv-formula/
+    title: "The Dangerous Seduction of the Lifetime Value (LTV) Formula"
+  - url: https://abovethecrowd.com/2019/02/27/money-out-of-nowhere-how-internet-marketplaces-unlock-economic-wealth/
+    title: "Money Out of Nowhere — How Internet Marketplaces Unlock Economic Wealth"
+
+  # Capital Discipline & Growth Skepticism
+  - url: https://abovethecrowd.com/2021/06/03/customers-love-free-stuff-but-thats-not-your-problem/
+    title: "Customers Love Free Stuff — But That's Not Your Problem"
+  - url: https://abovethecrowd.com/2022/11/28/venture-capital-red-flag-checklist/
+    title: "Venture Capital Red Flag Checklist"
+
+  # Uber & Governance
+  - url: https://abovethecrowd.com/2018/04/19/the-thing-i-love-most-about-uber/
+    title: "The Thing I Love Most About Uber (network effects at scale)"
+  - url: https://abovethecrowd.com/2016/04/21/on-the-road-to-recap/
+    title: "On the Road to Recap (governance, shareholder rights, Uber board)"
+
+  # Healthcare & Vertical Markets
+  - url: https://abovethecrowd.com/2017/12/18/customer-first-healthcare/
+    title: "Customer-First Healthcare (marketplace dynamics in healthcare)"
+
+  # SPACs & Public Markets
+  - url: https://abovethecrowd.com/2020/08/23/going-public-circa-2020-door-3-the-spac/
+    title: "Going Public Circa 2020: Door #3 — The SPAC"
+
+  # Talks & Interviews
+  - url: https://www.youtube.com/watch?v=xfHLmXfOxvs
+    title: "Bill Gurley at Upfront Summit — Running Down a Dream"
+  - url: https://www.youtube.com/watch?v=nGNM0EVzMbA
+    title: "Bill Gurley — All Things Marketplaces (a16z)"
+  - url: https://www.acquired.fm/episodes/benchmark-part-ii-bill-gurley
+    title: "Acquired Podcast — Benchmark Part II: Bill Gurley"
+
+  # Additional Above the Crowd Posts
+  - url: https://abovethecrowd.com/2012/05/10/the-most-powerful-internet-metric-of-all/
+    title: "The Most Powerful Internet Metric of All (conversion rates as health)"
+  - url: https://abovethecrowd.com/2012/11/15/in-defense-of-free/
+    title: "In Defense of Free (when free is strategy, not weakness)"
+  - url: https://abovethecrowd.com/2013/11/25/the-reinvention-of-education-by-internet-marketplaces/
+    title: "The Reinvention of Education by Internet Marketplaces"
+  - url: https://abovethecrowd.com/2015/02/06/the-lost-interview/
+    title: "The Lost Interview (Jobs on distribution and competitive dynamics)"
+  - url: https://abovethecrowd.com/2016/05/13/in-defense-of-the-deck/
+    title: "In Defense of the Deck (IPO transparency, direct listings)"
+  - url: https://abovethecrowd.com/2017/03/27/an-annual-or-quarterly-cadence-for-corporate-transparency/
+    title: "An Annual or Quarterly Cadence for Corporate Transparency?"
+  - url: https://abovethecrowd.com/2020/12/03/splitting-the-baby-a-new-path-for-uber-and-its-drivers/
+    title: "Splitting the Baby — A New Path for Uber and Its Drivers"
+  - url: https://abovethecrowd.com/2023/06/23/the-truth-about-venture-capital/
+    title: "The Truth About Venture Capital (returns, power law, LP economics)"
+  - url: https://abovethecrowd.com/2011/10/31/the-reinvention-of-large-cap-tech-investing/
+    title: "The Reinvention of Large Cap Tech Investing"
+  - url: https://abovethecrowd.com/2014/03/08/the-global-taxi-hailer-update/
+    title: "The Global Taxi Hailer Update (ride-sharing market expansion thesis)"
+  - url: https://abovethecrowd.com/2011/03/24/the-new-new-distribution-model-in-consumer-web-deals/
+    title: "The New New Distribution Model (daily deals economics, GroupOn analysis)"
+  - url: https://abovethecrowd.com/2019/09/09/a-post-ipo-reality-check/
+    title: "A Post-IPO Reality Check (WeWork, Uber, Lyft — public market discipline)"

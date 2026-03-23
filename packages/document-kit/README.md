@@ -1,6 +1,6 @@
 # @pauljump/document-kit
 
-OCR and structured document extraction powered by Claude's vision API.
+OCR and structured document extraction via multimodal LLM vision APIs.
 
 ## Install
 

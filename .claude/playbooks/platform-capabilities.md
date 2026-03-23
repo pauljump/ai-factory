@@ -2,7 +2,7 @@
 
 How to add, modify, and maintain shared code in `packages/`. The goal is simple: shared code should make every app faster to build without breaking existing apps.
 
-Learned from: api-kit, llm-kit, socrata-kit extraction sessions (formalized 2026-03-15)
+Learned from: multiple package extraction sessions
 
 ## What Is a Platform Capability
 
@@ -37,7 +37,7 @@ Don't preemptively build shared code. Wait until the same problem shows up in tw
 1. **Spot the pattern.** You solved the same problem twice — or the Spotter flagged it.
 2. **File a GitHub Issue** with label `factory-capability`. Describe what capability is needed and which projects would benefit.
 3. **Scout existing implementations.** Before designing the abstraction, read how each project solved it. The best shared code is extracted from working code, not designed in the abstract.
-4. **Paul approves before building.** Present the proposal: what it does, what it exports, which projects consume it, what the API looks like. No code until green light.
+4. **Get approval before building.** Present the proposal: what it does, what it exports, which projects consume it, what the API looks like. No code until green light.
 
 ### After a New Capability Ships
 

@@ -1,12 +1,12 @@
 # Signal Bench — From Inspiration to Factory Product
 
-> **When to use:** Paul saw something interesting (Twitter thread, GitHub repo, dataset, article, hot take) and wants to figure out what the factory can build with it.
+> **When to use:** the operator saw something interesting (Twitter thread, GitHub repo, dataset, article, hot take) and wants to figure out what the factory can build with it.
 
 ## The Flow
 
 ### 1. Capture the Signal
 
-Paul pastes the signal — a URL, text, screenshot, or description of what he saw.
+the operator pastes the signal — a URL, text, screenshot, or description of what he saw.
 
 **Your job:** Extract the core signal. Not a summary — the *transferable pattern*. What's the underlying mechanic stripped of its specific domain?
 
@@ -48,14 +48,14 @@ You can chain them. Signal-scout finds the collision → Travis tests the busine
 
 If the session lands somewhere real, scaffold an idea card:
 
-1. Create card at `open-pawl/system/ideas/cards/IDEA-{next}_slug.md` from template
+1. Create card at `ideas/cards/IDEA-{next}_slug.md` from template
 2. The card should contain the raw materials from the jam:
    - **The Problem** — from the domain overlay step
    - **Core Concept** — from the combo discovery step
    - **MVP** — from the one-session test
    - **Stack Profile** — from the capability scan (checkboxes already filled)
    - **Open Questions** — gaps, kill criteria, things to validate
-3. Append to `open-pawl/system/ideas/catalog.csv`
+3. Append to the idea catalog CSV
 4. Log the signal that inspired it in the card's **Insights** section
 
 ### 5. Log the Signal (Even If It Doesn't Graduate)

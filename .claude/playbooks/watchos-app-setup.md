@@ -1,6 +1,6 @@
 # Playbook: watchOS App Setup
 
-Learned from: BooWho (2026-03-14)
+Learned from: production watchOS app deployment
 
 ## Prerequisites
 
@@ -44,7 +44,7 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.9"
-    DEVELOPMENT_TEAM: 99US464DK4
+    DEVELOPMENT_TEAM: YOUR_TEAM_ID
 
 targets:
   MyApp:

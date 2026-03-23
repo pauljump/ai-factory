@@ -1,73 +1,119 @@
 # AI Factory
 
-A monorepo system for shipping AI-native products. 21 shared packages, 16 operational playbooks, an agent persona engine, and an MCP server template — extracted from a private monorepo powering 80+ shipped projects (Cloud Run, TestFlight, App Store).
+A monorepo system for going from prompt to production. 21 shared packages, 16 operational playbooks, an agentic persona engine, and an MCP server template — built to make shipping AI-native products repeatable and fast.
 
-This isn't a framework or a starter kit. It's a production factory: the infrastructure, workflows, and AI agent operating system I use to go from idea to deployed product in a single session.
+The thesis: the hard part of GenAI isn't the model call — it's the infrastructure between "someone had an idea" and "it's running in production." This system solves that by treating the factory as the product. Every app conforms to shared primitives. Every capability upgrade benefits every tenant simultaneously. Every new project starts closer to production than the last one.
 
-## What's Here
+80+ projects have shipped through this system. The primitives are the point.
 
-### `packages/` — Shared Infrastructure (21 packages)
+## Architecture
 
-Every package is a single-responsibility npm module. Average ~350 LOC. No bloat.
+```
+.claude/                    ← AI agent operating system
+  playbooks/                ← 16 battle-tested workflows (deploy, test, scrape, handoff)
+  templates/mcp-server/     ← MCP server scaffold for tool use
+  agents/                   ← Background agents (factory scanner, git ops)
+  soul.md                   ← Persistent agent identity across sessions
 
-| Package | What It Does |
-|---------|-------------|
-| **api-kit** | Fastify server scaffold — JWT auth, SQLite (WAL), rate limiting, health check, HTTP client with retry, cron |
-| **llm-kit** | Provider-agnostic LLM client — OpenAI + Anthropic, same interface, tool use baked in |
-| **teek** | AI persona engine — 16 personas (Naval, PG, Travis Kalanick, etc.), 12 professional roles, 2 autonomous agents |
-| **voice-kit** | Real-time voice via OpenAI Realtime API — WebSocket sessions, browser relay, tool calling mid-conversation |
-| **document-kit** | OCR + structured extraction via Claude vision — Zod schema validation on extracted data |
-| **etl-kit** | Data pipelines — fetch with exponential backoff, rate limiting, HTML scraping (cheerio), pipeline orchestrator |
-| **search-kit** | SQLite FTS5 — BM25 ranking, snippet generation, composable multi-field filters |
-| **watch-kit** | Availability monitoring — snapshot store, diff engine, condition evaluation, action dispatch |
-| **predict-kit** | Pattern prediction — segmented bucketing, outcome probability learning, confidence scoring |
-| **event-bus** | In-process pub/sub + webhook delivery with HMAC signing and retry |
-| **job-queue** | Persistent scheduled jobs — cron syntax, retry on failure, job history. SQLite-backed |
-| **notify-kit** | Notifications — Resend email, APNs push |
-| **payments-kit** | Stripe — checkout sessions, billing portal, webhook verification |
-| **analytics-kit** | Event tracking, funnels, retention. Self-hosted, SQLite-backed |
-| **gamify-kit** | Points ledger, streaks, achievements/badges |
-| **storage-kit** | Google Cloud Storage — uploads, signed URLs, delete |
-| **socrata-kit** | Government open data API wrapper (Socrata/SODA) |
-| **geo-registry** | Geographic registry with H3 hexagonal indexing, clustering, density scoring |
-| **pods-kit** | Direct messaging + group messaging infrastructure |
-| **ios-templates** | 12 Swift managers — StoreKit, Live Activities, Siri, deep links, push, background tasks, on-device AI, document scanning |
-| **web-templates** | Next.js 16 + React 19 + Tailwind 4 — design tokens, AI streaming chat, maps, charts, Dockerfile |
+packages/                   ← Shared infrastructure (21 packages)
+  api-kit/                  ← Server framework (Fastify + SQLite + JWT + cron)
+  llm-kit/                  ← Provider-agnostic LLM client (OpenAI ↔ Anthropic, tool use)
+  teek/                     ← Agentic persona engine (16 personas, 12 roles, 2 agents)
+  voice-kit/                ← Real-time voice (OpenAI Realtime API, WebSocket)
+  document-kit/             ← OCR + structured extraction (Claude vision + Zod)
+  etl-kit/                  ← Data pipelines (retry, rate limit, scrape, orchestrate)
+  ...                       ← + 15 more (search, analytics, payments, events, jobs, etc.)
 
-### `.claude/` — AI Agent Operating System
+CLAUDE.md                   ← The operating protocol (how AI agents work in this codebase)
+PLATFORM_CAPABILITIES.md    ← Full capability catalog with use cases
+```
 
-This is how AI coding agents operate in this codebase. It's a structured system for human-AI collaboration.
+## Key Primitives
 
-| Component | Purpose |
-|-----------|---------|
-| **`soul.md`** | Written by Claude, for Claude. Self-reflective guidance that persists across sessions. |
-| **`playbooks/`** | 16 battle-tested workflows — Cloud Run deploy, TestFlight pipeline, data fetching patterns, LLM key management, StoreKit IAP, watchOS setup, session handoff protocol |
-| **`templates/mcp-server/`** | MCP (Model Context Protocol) server scaffold — TypeScript, ready to expose any project's data to AI agents |
-| **`templates/`** | Project scaffolding — idea cards, project docs, research templates |
-| **`agents/`** | Background agents that run during sessions — the Spotter watches for cross-project patterns and extraction candidates |
+### Provider-Agnostic LLM Client — `llm-kit`
 
-### `koba237/` — The Factory Pipeline
+Swap between OpenAI and Anthropic with zero code changes. Same interface for chat and tool use. The abstraction exists because production systems shouldn't be locked to a single provider — you need to A/B test models, fall back on outages, and chase the cost/quality frontier.
 
-The meta-tool: takes idea cards through a multi-stage enrichment pipeline using AI personas, then scaffolds and deploys projects.
+```typescript
+const client = createLLMClient({ provider: "anthropic", apiKey });
+const result = await client.chat(messages, { tools });
+// Switch to OpenAI by changing one string. Same result shape.
+```
 
-**Pipeline stages:**
-1. **Gate** — Naval Ravikant + Paul Graham + Travis Kalanick vote (2/3 must advance)
-2. **Panel** — Domain-specific persona pair + 1 random from 11-person panel
-3. **Factory** — Signal scout scans capability ledger, maps idea to existing infrastructure
+### Agentic Persona Engine — `teek`
 
-149 ideas processed. 47 advanced. 101 killed. The filter is the feature.
+16 AI personas built from verified source material (20-35 URLs each). 12 professional roles. 2 autonomous agents. Each entity is a filesystem-based profile that constructs LLM system prompts — no hallucination in scope, profiles define what the agent knows and how it thinks.
 
-## Architecture Decisions
+Used in the evaluation pipeline as a multi-agent advisory board: ideas pass through a 3-persona gate (2/3 must advance), then get deeper analysis from domain-specific pairs. 149 ideas evaluated. 47 advanced. 101 killed. The filter is the feature.
 
-**SQLite everywhere.** Not Postgres, not Redis. SQLite in WAL mode with better-sqlite3. Every package that needs persistence uses it. One fewer thing to deploy, monitor, and pay for. This works because each service owns its own data.
+```bash
+pnpm ask --persona naval "Should we build or buy?"
+pnpm ask --role staff-eng "Review this architecture"
+pnpm ask --agent spotter  # autonomous background scanner
+```
 
-**Provider-agnostic AI.** `llm-kit` wraps OpenAI and Anthropic behind the same interface. Swap models in config, not code. Tool use (function calling) works identically across providers.
+### MCP Server Template — `.claude/templates/mcp-server/`
 
-**Templates over packages for UI.** iOS and web templates are copied, not imported. Each app needs its own brand colors, fonts, metadata. Copy-paste beats dependency management for presentation code. Backend packages are real npm packages — `pnpm` workspace handles sharing cleanly.
+TypeScript scaffold for Model Context Protocol servers. Expose any project's data to AI agents (Claude Desktop, Cursor, ChatGPT). Ready to clone and extend — resource definitions, tool handlers, stdio transport.
 
-**Playbooks over documentation.** Knowledge lives in executable playbooks (`.claude/playbooks/`), not wiki pages. Each playbook solves a specific problem: "how do I deploy to Cloud Run?" has a 10K character playbook with every command, gotcha, and config. A cold-start session reads the playbook and executes.
+### AI Agent Operating System — `.claude/`
 
-**Personas as thought partners.** `teek` simulates specific people (Travis Kalanick, Paul Graham, etc.) from verified source material — each persona built from 20-35 URLs. Used in the factory pipeline to evaluate ideas from multiple perspectives before writing code.
+The system that makes AI coding agents productive in a large codebase:
+
+- **`soul.md`** — Persistent agent identity. Written by the agent, for the agent. Survives across sessions.
+- **16 playbooks** — Executable workflows: Cloud Run deploy, TestFlight pipeline, data fetching, LLM key management, session handoff. A cold-start agent reads the playbook and executes — no ramp-up time.
+- **Background agents** — The Spotter runs during sessions watching for cross-project patterns, duplicate code, and extraction candidates.
+- **`CLAUDE.md`** — The operating protocol. Defines the scout→build→review→decide loop, stack check gates, and compounding rules.
+
+This isn't documentation. It's infrastructure for making AI agents productive at scale.
+
+### Sandbox-to-Production Pattern
+
+Every new project follows the same path:
+1. **Evaluate** — Run the idea through a multi-agent persona panel (teek)
+2. **Stack check** — Does the factory already support what this needs? If not, the idea waits or adapts
+3. **Scaffold** — Copy templates, wire up shared packages
+4. **Deploy** — Follow the playbook (Cloud Run for API/web, TestFlight for iOS)
+
+The factory constrains the product. If the platform doesn't support a capability, the product doesn't have it — until the platform is extended and every tenant benefits.
+
+## All Packages
+
+| Package | What It Does | LOC |
+|---------|-------------|-----|
+| **api-kit** | Fastify server — JWT auth, SQLite (WAL), rate limiting, health check, HTTP client with retry, cron | ~415 |
+| **llm-kit** | Provider-agnostic LLM client — OpenAI + Anthropic, tool use | ~260 |
+| **teek** | Agentic persona engine — 16 personas, 12 roles, 2 agents, CLI + library | ~257 |
+| **voice-kit** | Real-time voice — OpenAI Realtime API, WebSocket, tool calling mid-conversation | ~447 |
+| **document-kit** | OCR + structured extraction — Claude vision, Zod schemas | ~257 |
+| **etl-kit** | Data pipelines — exponential backoff, rate limiting, cheerio scraping, orchestrator | ~255 |
+| **search-kit** | Full-text search — SQLite FTS5, BM25 ranking, snippets, composable filters | ~306 |
+| **watch-kit** | Availability monitoring — snapshot store, diff engine, condition evaluation, action dispatch | ~810 |
+| **predict-kit** | Pattern prediction — segmented bucketing, outcome probability, confidence scoring | ~277 |
+| **event-bus** | Pub/sub + webhook delivery — HMAC signing, retry | ~206 |
+| **job-queue** | Persistent job scheduling — cron syntax, retry on failure, SQLite-backed | ~460 |
+| **notify-kit** | Notifications — Resend email, APNs push | ~296 |
+| **payments-kit** | Stripe — checkout, billing portal, webhook verification | ~266 |
+| **analytics-kit** | Event tracking, funnels, retention — self-hosted, SQLite | ~315 |
+| **gamify-kit** | Points ledger, streaks, achievements/badges | ~431 |
+| **storage-kit** | Google Cloud Storage — uploads, signed URLs, delete | ~93 |
+| **socrata-kit** | Government open data API wrapper (Socrata/SODA) | ~499 |
+| **geo-registry** | Geographic registry — H3 hexagonal indexing, clustering, density scoring | ~930 |
+| **pods-kit** | Direct messaging + group messaging infrastructure | ~858 |
+| **ios-templates** | 11 Swift managers — StoreKit, Live Activities, Siri, deep links, push, on-device AI, doc scanning | — |
+| **web-templates** | Next.js 16 + React 19 + Tailwind 4 — design tokens, AI streaming chat, maps, charts, Dockerfile | — |
+
+## Design Decisions
+
+**SQLite everywhere.** Every package that needs persistence uses SQLite in WAL mode. One fewer thing to deploy, monitor, and pay for. Services own their own data.
+
+**Provider-agnostic from day one.** The LLM client wraps OpenAI and Anthropic behind the same interface because production systems need to swap models without rewriting integration code.
+
+**Playbooks over documentation.** Knowledge lives in executable playbooks, not wiki pages. A playbook solves one problem completely — every command, every gotcha, every config. An agent reads it and executes.
+
+**Templates for UI, packages for logic.** iOS and web templates are copied (each app needs its own brand). Backend packages are real npm imports (one place to fix bugs).
+
+**The factory constrains the product.** If the platform doesn't support it, the product doesn't have it. This keeps 80+ products consistent and makes capability upgrades benefit every tenant.
 
 ## Stack
 
@@ -78,16 +124,3 @@ The meta-tool: takes idea cards through a multi-stage enrichment pipeline using 
 - **AI:** OpenAI API, Anthropic API, Vercel AI SDK, Apple Foundation Models
 - **Deploy:** Cloud Run (API + web), TestFlight (iOS)
 - **Monorepo:** pnpm workspaces, Turborepo
-
-## How It Works in Practice
-
-A new product starts as an idea card (markdown with frontmatter). The card goes through the Koba pipeline — AI personas evaluate it, the factory scanner checks what infrastructure already exists. If the idea passes, a session reads the relevant playbooks and scaffolds the project using shared packages.
-
-Every backend starts with `api-kit`. Every web app copies `web-templates`. Every iOS app copies `ios-templates`. The factory constraints are intentional: if the platform doesn't support it, the product doesn't have it — until the platform is extended. This keeps 80+ products consistent and every capability upgrade benefits all of them simultaneously.
-
-A typical shipping session: read the playbook, scaffold from templates, wire up packages, deploy. Idea to production in hours, not weeks.
-
-## Related
-
-- **MCP server template** — `.claude/templates/mcp-server/` exposes project data to AI agents via the Model Context Protocol
-- **Platform capabilities catalog** — `PLATFORM_CAPABILITIES.md` lists every factory capability with use cases and cost

@@ -95,10 +95,10 @@ When using research in a session:
   "topic": "Human-readable topic name",
   "slug": "kebab-case-directory-name",
   "researched_at": "2026-03-11",
-  "triggered_by": "What prompted this research — e.g., 'Orchard spawn UX design'",
+  "triggered_by": "What prompted this research — e.g., 'onboarding UX design'",
   "confidence": "high | medium | low",
   "token_estimate": "rough estimate of tokens spent on this research",
-  "related_projects": ["orchard"],
+  "related_projects": ["my-project"],
   "tags": ["psychology", "ux", "onboarding"],
   "extensions": [
     {
@@ -140,7 +140,7 @@ Save generously here. This is the cheap part — text is small. The expensive pa
 
 Research is warranted when:
 - We're designing something new and the design depends on understanding human behavior, technical constraints, or market context
-- Paul asks "can you look into..." or "what does the research say about..."
+- The operator asks "can you look into..." or "what does the research say about..."
 - We're about to make an irreversible decision and want evidence
 - We've hit a design disagreement and need external input to break the tie
 

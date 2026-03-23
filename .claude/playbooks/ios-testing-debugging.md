@@ -1,6 +1,6 @@
 # Playbook: iOS Testing & Debugging (CLI-only)
 
-Learned from: Foundry bug hunt (2026-03-14)
+Learned from: production bug hunts
 
 ## What We Can Do (Without Xcode GUI)
 
@@ -19,7 +19,7 @@ Learned from: Foundry bug hunt (2026-03-14)
 - **Visual debugging** (view hierarchy inspector)
 - **Breakpoints / step debugging**
 - **Live preview** (SwiftUI Previews require Xcode canvas)
-- **Test on physical device** (Paul does this via TestFlight)
+- **Test on physical device** (done via TestFlight)
 
 ## Build & Test Commands
 
@@ -45,46 +45,46 @@ xcodebuild build -project *.xcodeproj -scheme <Scheme> \
 ```yaml
 # In project.yml — unit test target
 targets:
-  FoundryTests:
+  MyAppTests:
     type: bundle.unit-test
     platform: iOS
     sources:
       - path: Tests
     dependencies:
-      - target: Foundry
+      - target: MyApp
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.storyfoundry.app.tests
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.app.tests
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: YES
-        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Foundry.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Foundry"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/MyApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyApp"
         BUNDLE_LOADER: "$(TEST_HOST)"
 
   # UI test target (separate — launches full app)
-  FoundryUITests:
+  MyAppUITests:
     type: bundle.ui-testing
     platform: iOS
     sources:
       - path: UITests
     dependencies:
-      - target: Foundry
+      - target: MyApp
     settings:
       base:
-        TEST_TARGET_NAME: Foundry
+        TEST_TARGET_NAME: MyApp
         GENERATE_INFOPLIST_FILE: YES
 
 # Scheme must include test targets
 schemes:
-  Foundry:
+  MyApp:
     build:
       targets:
-        Foundry: all
+        MyApp: all
     test:
       config: Debug
       targets:
-        - name: FoundryTests
+        - name: MyAppTests
           parallelizable: true
-        - name: FoundryUITests
+        - name: MyAppUITests
       gatherCoverageData: true
 ```
 
@@ -97,16 +97,16 @@ schemes:
 
 ```bash
 # Run one test class
-xcodebuild test -only-testing:FoundryTests/TimerEngineTests
+xcodebuild test -only-testing:MyAppTests/TimerEngineTests
 
 # Run one test method
-xcodebuild test -only-testing:FoundryTests/TimerEngineTests/testCountdownCompletes
+xcodebuild test -only-testing:MyAppTests/TimerEngineTests/testCountdownCompletes
 
 # Skip slow UI tests
-xcodebuild test -skip-testing:FoundryUITests
+xcodebuild test -skip-testing:MyAppUITests
 
 # Build tests without running (verify they compile)
-xcodebuild build-for-testing -project *.xcodeproj -scheme Foundry \
+xcodebuild build-for-testing -project *.xcodeproj -scheme MyApp \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
 ```
 
@@ -122,13 +122,13 @@ Run this before every TestFlight push. Grep for known problem patterns.
 
 ```bash
 # Force unwraps on URL construction
-grep -rn 'URL(string:.*!)' FoundryApp/Sources/
+grep -rn 'URL(string:.*!)' Sources/
 
 # Force unwraps on dictionary/array access
-grep -rn '\[.*\]!' FoundryApp/Sources/
+grep -rn '\[.*\]!' Sources/
 
 # Force try
-grep -rn 'try!' FoundryApp/Sources/
+grep -rn 'try!' Sources/
 ```
 
 ### 2. State Management Bugs
@@ -136,10 +136,10 @@ grep -rn 'try!' FoundryApp/Sources/
 ```bash
 # @ObservedObject should usually be @StateObject for owned objects
 # (false positives exist — review manually)
-grep -rn '@ObservedObject.*=' FoundryApp/Sources/
+grep -rn '@ObservedObject.*=' Sources/
 
 # State mutations from background thread (missing @MainActor)
-grep -rn 'DispatchQueue.global' FoundryApp/Sources/
+grep -rn 'DispatchQueue.global' Sources/
 ```
 
 **Rules of thumb:**
@@ -152,11 +152,11 @@ grep -rn 'DispatchQueue.global' FoundryApp/Sources/
 
 ```bash
 # System colors that break our custom dark theme
-grep -rn 'Color(.system' FoundryApp/Sources/
-grep -rn '\.roundedBorder' FoundryApp/Sources/
-grep -rn 'foregroundColor(\.primary)' FoundryApp/Sources/
-grep -rn 'foregroundColor(\.secondary)' FoundryApp/Sources/
-grep -rn 'Color\.blue' FoundryApp/Sources/
+grep -rn 'Color(.system' Sources/
+grep -rn '\.roundedBorder' Sources/
+grep -rn 'foregroundColor(\.primary)' Sources/
+grep -rn 'foregroundColor(\.secondary)' Sources/
+grep -rn 'Color\.blue' Sources/
 
 # Should use: Theme.surface, Theme.surfaceLight, Theme.textPrimary, Theme.textSecondary, Theme.accent
 ```
@@ -165,23 +165,23 @@ grep -rn 'Color\.blue' FoundryApp/Sources/
 
 ```bash
 # DispatchQueue.main.asyncAfter without cleanup (infinite loops)
-grep -rn 'asyncAfter' FoundryApp/Sources/
+grep -rn 'asyncAfter' Sources/
 
 # CADisplayLink without proper invalidation
-grep -rn 'CADisplayLink' FoundryApp/Sources/
+grep -rn 'CADisplayLink' Sources/
 
 # NotificationCenter observers without removal
-grep -rn 'addObserver' FoundryApp/Sources/
+grep -rn 'addObserver' Sources/
 
 # Timer.scheduledTimer without invalidation
-grep -rn 'Timer.scheduled' FoundryApp/Sources/
+grep -rn 'Timer.scheduled' Sources/
 ```
 
 ### 5. Navigation Conflicts
 
 ```bash
 # Multiple .sheet or .fullScreenCover on same view (SwiftUI drops extras)
-grep -rn '\.sheet\|\.fullScreenCover' FoundryApp/Sources/ | \
+grep -rn '\.sheet\|\.fullScreenCover' Sources/ | \
   awk -F: '{print $1}' | sort | uniq -c | sort -rn
 # Files with 2+ presentations need manual review
 ```
@@ -190,10 +190,10 @@ grep -rn '\.sheet\|\.fullScreenCover' FoundryApp/Sources/ | \
 
 ```bash
 # Images/buttons without accessibility labels
-grep -rn 'Image(systemName' FoundryApp/Sources/ | grep -v 'accessibilityLabel'
+grep -rn 'Image(systemName' Sources/ | grep -v 'accessibilityLabel'
 
 # Interactive elements without minimum 44pt touch targets
-grep -rn '\.frame(width:.*height:' FoundryApp/Sources/ | grep -E 'width: [0-3][0-9],'
+grep -rn '\.frame(width:.*height:' Sources/ | grep -E 'width: [0-3][0-9],'
 ```
 
 ## Common SwiftUI Bug Patterns
@@ -236,7 +236,7 @@ Use `os_log` instead of `print()` for runtime debugging from CLI:
 
 ```swift
 import OSLog
-private let logger = Logger(subsystem: "com.storyfoundry.app", category: "timer")
+private let logger = Logger(subsystem: "com.example.app", category: "timer")
 logger.info("Timer started: \(duration)s")
 logger.error("Failed to load: \(error.localizedDescription)")
 ```
@@ -244,7 +244,7 @@ logger.error("Failed to load: \(error.localizedDescription)")
 Then stream from CLI:
 ```bash
 xcrun simctl spawn booted log stream \
-  --predicate 'subsystem == "com.storyfoundry.app" AND category == "timer"'
+  --predicate 'subsystem == "com.example.app" AND category == "timer"'
 ```
 
 ## Simulator Management
@@ -260,7 +260,7 @@ xcrun simctl boot "iPhone 17 Pro"
 xcrun simctl install booted /path/to/App.app
 
 # Stream simulator logs (runtime crashes, os_log output)
-xcrun simctl spawn booted log stream --predicate 'subsystem == "com.storyfoundry.app"'
+xcrun simctl spawn booted log stream --predicate 'subsystem == "com.example.app"'
 
 # Take a screenshot
 xcrun simctl io booted screenshot /tmp/screenshot.png
@@ -271,13 +271,13 @@ xcrun simctl erase "iPhone 17 Pro"
 
 ## Debugging Workflow
 
-When Paul reports a bug from TestFlight:
+When a bug is reported from TestFlight:
 
 1. **Reproduce mentally** — read the code path for the described behavior
 2. **Check the static checklist** — often the bug matches a known pattern
 3. **Build with warnings** — sometimes the compiler already flagged it
 4. **Fix, build, test locally** — `xcodebuild build` to verify the fix compiles
-5. **Push to TestFlight** — Paul verifies on device
+5. **Push to TestFlight** — verify on device
 6. **Document the pattern** — if it's a new bug pattern, add it to this playbook
 
 ## Gotchas

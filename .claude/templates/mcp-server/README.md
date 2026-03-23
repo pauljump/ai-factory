@@ -13,7 +13,7 @@ Model Context Protocol (MCP) is the standard for connecting AI agents to tools a
    cp -r .claude/templates/mcp-server/ <project>/mcp/
    ```
 
-2. **Find-replace `__PROJECT__`** with your project name (e.g. `stuywatch`)
+2. **Find-replace `__PROJECT__`** with your project name (e.g. `myapp`)
 
 3. **Install dependencies:**
    ```bash

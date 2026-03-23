@@ -1,6 +1,6 @@
 # Playbook: Web App Setup (Next.js)
 
-Learned from: 20+ projects in the monorepo (2026-03-10), web-templates extraction (2026-03-11)
+Learned from: 20+ production projects and web-templates extraction
 
 ## The Stack
 
@@ -63,9 +63,9 @@ These vary by project. Pick one at the start and note it in the project's CLAUDE
 
 | Option | When to use |
 |--------|-------------|
-| None | Static/client-only apps (ny-tax-tipping-point) |
-| Prisma + PostgreSQL | Multi-user apps with relational data (wuxtry, gitty) |
-| SQLite via api-kit | Simple apps with a separate API server (paperclaw, foundry) |
+| None | Static/client-only apps |
+| Prisma + PostgreSQL | Multi-user apps with relational data |
+| SQLite via api-kit | Simple apps with a separate API server |
 
 If using Prisma:
 ```bash
@@ -78,7 +78,7 @@ npx prisma init
 | Option | When to use |
 |--------|-------------|
 | Next.js Route Handlers | Simple CRUD, no real-time needs |
-| tRPC | Type-safe client-server when frontend and backend are in the same repo (wuxtry) |
+| tRPC | Type-safe client-server when frontend and backend are in the same repo |
 | Separate Fastify API (api-kit) | When the backend serves iOS + web, or needs cron/workers |
 
 ### Testing

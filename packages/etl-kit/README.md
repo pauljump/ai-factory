@@ -64,7 +64,7 @@ Orchestrate fetch -> transform -> load with logging and timing.
 import { createPipeline, fetchWithRetry } from '@pauljump/etl-kit'
 
 const result = await createPipeline({
-  name: 'stuywatch-listings',
+  name: 'daily-sync',
   fetch: async () => {
     const res = await fetchWithRetry('https://...')
     return res.json()
@@ -79,4 +79,4 @@ console.log(`Loaded in ${result.durationMs}ms`)
 
 ## No Puppeteer
 
-This package intentionally excludes Puppeteer. It's too heavy for a shared dependency. Projects that need browser automation (e.g., bookem) should install Puppeteer directly and use `fetchWithRetry` + `RateLimiter` for the parts that don't need a browser.
+This package intentionally excludes Puppeteer. It's too heavy for a shared dependency. Projects that need browser automation should install Puppeteer directly and use `fetchWithRetry` + `RateLimiter` for the parts that don't need a browser.

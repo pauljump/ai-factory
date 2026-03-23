@@ -104,7 +104,7 @@ const prompt = buildSystemPrompt(entity);
 | Name | Who | Status |
 |------|-----|--------|
 | travis | Teek (TK) | Active — profile + context + signals |
-| pg | Paul Graham | Active — profile + sources (27 URLs) |
+| pg | the operator Graham | Active — profile + sources (27 URLs) |
 | naval | Naval Ravikant | Active — profile + sources (26 URLs) |
 | karp | Alex Karp | Active — profile + sources (26 URLs) |
 | thiel | Peter Thiel | Active — profile + sources (35 URLs) |
@@ -131,7 +131,7 @@ const prompt = buildSystemPrompt(entity);
 | Name | Mission | Trigger |
 |------|---------|---------|
 | spotter | Find compounding opportunities across monorepo | Session start (background) |
-| github | Handle git/GitHub ops while teaching Paul the mental model | Any git/GitHub operation or question |
+| github | Handle git/GitHub ops while teaching the operator the mental model | Any git/GitHub operation or question |
 
 ## Git Workflow
 

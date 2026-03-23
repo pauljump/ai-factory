@@ -8,7 +8,7 @@ Learned from: GitHub tools scouting session (2026-03-16)
 
 ## When to Use
 
-- After a major refactor or feature split (e.g., Kit Home → Kit Home + Kit Tools)
+- After a major refactor or feature split
 - Before a TestFlight build to slim the binary
 - When entering a project cold and wanting to understand what's actually live
 - As periodic hygiene across all iOS projects
@@ -55,12 +55,12 @@ periphery scan \
 
 ```bash
 periphery scan \
-  --project PaperClaw.xcodeproj \
-  --schemes PaperClaw \
-  --targets PaperClaw --targets PaperClawMessages \
+  --project MyApp.xcodeproj \
+  --schemes MyApp \
+  --targets MyApp --targets MyAppMessages \
   --retain-codable-properties \
   --skip-build \
-  --index-store-path /tmp/periphery-paperclaw/Index.noindex/DataStore
+  --index-store-path /tmp/periphery-myapp/Index.noindex/DataStore
 ```
 
 ## Finding Targets and Schemes
@@ -88,19 +88,19 @@ xcodebuild -project <Name>.xcodeproj -list
 3. **Obj-C interop** — if a project bridges to Obj-C, use `--retain-objc-accessible`
 4. **Widget/extension targets** — scan all targets together or you'll miss cross-target references
 5. **Build errors block scanning** — the project must compile cleanly first
-6. **False positives on types used via navigation chains** — Periphery may flag structs/enums as "unused" when they're actually referenced by views that are only reachable through NavigationStack/sheet/fullScreenCover chains. Always `xcodebuild build` after cleanup to catch these. (Learned 2026-03-16: Kit Home Pods/DM types were flagged unused but were referenced by PodsView, PodFeedView, DmConversationView which are reachable from HomeView.)
+6. **False positives on types used via navigation chains** — Periphery may flag structs/enums as "unused" when they're actually referenced by views that are only reachable through NavigationStack/sheet/fullScreenCover chains. Always `xcodebuild build` after cleanup to catch these.
 
 ## Persisting Config
 
 Create `.periphery.yml` in the project's `ios/` directory:
 
 ```yaml
-project: KitHome.xcodeproj
+project: MyApp.xcodeproj
 schemes:
-  - KitHome
+  - MyApp
 targets:
-  - KitHome
-  - MomentWidgetExtension
+  - MyApp
+  - WidgetExtension
 retain_codable_properties: true
 ```
 
@@ -111,20 +111,20 @@ Then just run `periphery scan` with no flags.
 To scan all iOS projects that build cleanly:
 
 ```bash
-for proj in kithome kittools paperclaw barkey stuywatch yardshare boowho kitlab; do
+for proj in app1 app2 app3; do
   echo "=== $proj ==="
-  cd /Users/mini-home/Desktop/monorepo/$proj/ios
+  cd /path/to/monorepo/$proj/ios
   xcodebuild build -project *.xcodeproj -scheme $(xcodebuild -project *.xcodeproj -list 2>/dev/null | grep -A1 'Schemes:' | tail -1 | xargs) -destination 'generic/platform=iOS Simulator' -derivedDataPath /tmp/periphery-$proj 2>&1 | tail -1
   periphery scan --project *.xcodeproj --schemes $(xcodebuild -project *.xcodeproj -list 2>/dev/null | grep -A1 'Schemes:' | tail -1 | xargs) --retain-codable-properties --skip-build --index-store-path /tmp/periphery-$proj/Index.noindex/DataStore 2>&1 | grep "warning:" | wc -l
   echo ""
 done
 ```
 
-## First Scan Results (2026-03-16)
+## First Scan Results
 
 | Project | Warnings | Main Issue |
 |---------|----------|------------|
-| Kit Home | 72 | Old story/community/moments/places code from pre-split |
-| Kit Tools | 61 | Inherited full APIClient + models, uses fraction |
-| PaperClaw | 19 | Unused API endpoints, dead theme tokens |
-| Orchard | Blocked | Build errors from deleted concierge files |
+| App A | 72 | Old code from pre-split |
+| App B | 61 | Inherited full APIClient + models, uses fraction |
+| App C | 19 | Unused API endpoints, dead theme tokens |
+| App D | Blocked | Build errors from deleted files |

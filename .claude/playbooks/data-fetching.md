@@ -2,16 +2,16 @@
 
 Patterns for pulling data from external sources — public APIs, HTML scraping, browser automation. Every data-driven project in the monorepo follows one of these patterns.
 
-Learned from: wuxtry, classgrid, bookem, paperclaw, upstreamdown (2026-03-11)
+Learned from: multiple production projects (2026-03-11)
 
 ## Decision: Which Pattern?
 
 | Pattern | When to use | Reference project |
 |---------|-------------|-------------------|
-| **API fetch** | JSON APIs, government data, Socrata portals | wuxtry, paperclaw |
-| **HTML scrape** | No API available, need to parse web pages | classgrid |
-| **Browser automation** | Sites behind auth, JS-rendered content | bookem |
-| **Turnstile-protected** | Cloudflare Turnstile CAPTCHA blocks fetch/cheerio | foundry (BACB) |
+| **API fetch** | JSON APIs, government data, Socrata portals | most data-driven apps |
+| **HTML scrape** | No API available, need to parse web pages | directory scrapers |
+| **Browser automation** | Sites behind auth, JS-rendered content | booking/auth-protected sites |
+| **Turnstile-protected** | Cloudflare Turnstile CAPTCHA blocks fetch/cheerio | protected registries |
 
 Start with the simplest pattern that works. Don't use Puppeteer if fetch + cheerio will do.
 
@@ -102,7 +102,7 @@ startCron({
 
 ## Pattern 2: HTML Scraping (cheerio)
 
-When there's no API. Based on classgrid's BaseScraper pattern.
+When there's no API. Based on a production scraper pattern.
 
 ```bash
 pnpm add cheerio
@@ -161,13 +161,13 @@ Last resort. Only when content is JS-rendered or behind auth/Cloudflare.
 pnpm add puppeteer
 ```
 
-See `bookem/apps/web/src/lib/scraper.ts` for a full reference implementation with:
+A full reference implementation includes:
 - Session management and re-login on token expiration
 - Mobile URL bypass for Cloudflare
 - Backfill with progress tracking
 - Deduplication via composite keys
 
-**Don't templatize this.** Browser scraping is too domain-specific. Copy from bookem and adapt.
+**Don't templatize this.** Browser scraping is too domain-specific. Copy from a working implementation and adapt.
 
 ## Pattern 4: Turnstile-Protected Scraping (puppeteer-real-browser / paid solver)
 
@@ -204,7 +204,7 @@ Standard across all patterns:
 3. **Track provenance** — record when data was fetched and from where
 
 ```typescript
-// Provenance tracking (from wuxtry pattern)
+// Provenance tracking pattern
 interface FetchResult<T> {
   data: T | null
   source: string
@@ -222,6 +222,6 @@ Data connectors built for one project can serve others. When you build a data pi
 1. **Keep the fetcher separate from the consumer.** Don't mix "get DOB data" with "render the UI."
 2. **Store raw data in a standard format.** SQLite tables or JSON files that any project can read.
 3. **Document the data shape.** What fields exist, what they mean, what's nullable.
-4. **Consider who else might use this data.** NYC permit data isn't just for UNIGNORABLE — it could power a real estate tool, a neighborhood tracker, a construction dashboard.
+4. **Consider who else might use this data.** NYC permit data could power a real estate tool, a neighborhood tracker, a construction dashboard.
 
 When a data stream is used by 2+ projects, extract it into a shared package or a standalone data service.

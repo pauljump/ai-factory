@@ -1,12 +1,12 @@
 # Playbook: Session Handoff
 
-Paul switches between projects constantly. Every session ends with a handoff so the next session (which may be a different Claude instance, days later) can pick up cold without asking "where were we?"
+the operator switches between projects constantly. Every session ends with a handoff so the next session (which may be a different Claude instance, days later) can pick up cold without asking "where were we?"
 
 Learned from: Every session (formalized 2026-03-14)
 
 ## When to Run This
 
-**Every time Paul says anything like:**
+**Every time the operator says anything like:**
 - "I'm ending the session"
 - "Let's wrap up"
 - "Document where we are"
@@ -31,15 +31,15 @@ Update the `## Current State` section with:
 - Bullet list of what THIS session built/changed/fixed
 - Be specific: "Visual Timer with sub-minute presets" not "added features"
 **What's next:**
-- What Paul said he wants next, or the natural next step
+- What the operator said he wants next, or the natural next step
 - Include issue numbers if they exist
 **What's blocking:**
-- Anything that can't proceed without a decision, external dependency, or Paul's input
+- Anything that can't proceed without a decision, external dependency, or the operator's input
 ```
 
 **Rules:**
 - "What just shipped" = this session only. Move previous session's items to a `## Recent History` section if needed, or just let them go — git log has the full record.
-- "What's next" = Paul's words, not your guesses. If he didn't say, look at GitHub Issues.
+- "What's next" = the operator's words, not your guesses. If he didn't say, look at GitHub Issues.
 - "What's blocking" = real blockers, not nice-to-haves. If nothing is blocking, say so.
 
 ### 2. Update Build Numbers & Deploy State
@@ -63,7 +63,7 @@ git push origin main
 **Rules:**
 - Commit message should summarize the session's work, not individual file changes
 - Push to main — we don't use branches
-- If there are uncommitted changes from OTHER projects you didn't touch this session, leave them alone unless Paul asks you to commit everything
+- If there are uncommitted changes from OTHER projects you didn't touch this session, leave them alone unless the operator asks you to commit everything
 - Never leave your own session's work uncommitted — the next session should be able to `git pull` and be ready
 
 ### 4. Verify GitHub is Clean

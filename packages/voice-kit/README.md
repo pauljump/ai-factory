@@ -17,7 +17,7 @@ import { VoiceSession } from '@pauljump/voice-kit'
 const session = new VoiceSession({
   apiKey: process.env.OPENAI_API_KEY!,
   voice: 'coral',
-  instructions: 'You are a helpful apartment finder for StuyWatch.',
+  instructions: 'You are a helpful assistant.',
   tools: [{
     name: 'search_listings',
     description: 'Search available apartments',

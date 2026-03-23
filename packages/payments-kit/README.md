@@ -1,6 +1,6 @@
 # @pauljump/payments-kit
 
-Provider-agnostic payments abstraction for the monorepo. Extracted from StuyWatch's working Stripe integration.
+Provider-agnostic payments abstraction for the monorepo. Wraps Stripe checkout, billing portal, and webhook verification.
 
 ## Quick start
 

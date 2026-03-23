@@ -2,7 +2,7 @@
 
 How to add in-app purchases to an iOS app. Covers non-consumable (lifetime unlock) and consumable (per-unit unlock) patterns.
 
-Learned from: StuyWatch (consumable unit unlocks), BARkey (non-consumable export), ios-templates (generic non-consumable)
+Learned from: production iOS apps with both consumable and non-consumable patterns
 
 ## Two Patterns
 
@@ -18,9 +18,9 @@ Template: `packages/ios-templates/StoreManager.swift`
 
 ### Consumable (per-item unlock)
 Use for: pay-per-use features. Unlock one unit, one report, one export.
-Reference: `stuywatch/ios/StuyWatch/Sources/App/StoreManager.swift`
+Reference: a production consumable StoreManager implementation
 
-- Single product ID reused for each purchase (e.g., `com.stuywatch.unit.unlock`)
+- Single product ID reused for each purchase (e.g., `com.yourapp.unit.unlock`)
 - **Server-side recording is critical** — verify on server BEFORE calling `transaction.finish()`
 - `Transaction.unfinished` handles crash recovery (purchases where app died before finishing)
 - No `currentEntitlements` — consumables don't persist in StoreKit
@@ -32,7 +32,7 @@ Reference: `stuywatch/ios/StuyWatch/Sources/App/StoreManager.swift`
 3. Fill in:
    - **Type:** Consumable or Non-Consumable
    - **Reference Name:** internal label (e.g., "Unit Unlock")
-   - **Product ID:** reverse-domain format (e.g., `com.stuywatch.unit.unlock`)
+   - **Product ID:** reverse-domain format (e.g., `com.yourapp.unit.unlock`)
    - **Price:** select from the price point schedule ($0.99, $1.99, etc.)
    - **Display Name + Description:** what the user sees on the purchase sheet
 4. **Status must be "Ready to Submit"** — if it says "Missing Metadata", add a screenshot of the purchase UI
@@ -49,7 +49,7 @@ Reference: `stuywatch/ios/StuyWatch/Sources/App/StoreManager.swift`
 ## Implementation Checklist
 
 1. **Create the product in App Store Connect** (see above)
-2. **Copy StoreManager.swift** from `packages/ios-templates/` (non-consumable) or reference StuyWatch's version (consumable)
+2. **Copy StoreManager.swift** from `packages/ios-templates/` (non-consumable) or adapt for consumable pattern
 3. **Set the product ID** — must match App Store Connect exactly
 4. **Add StoreKit capability** in your Xcode project / project.yml
 5. **Wire the purchase button:**
@@ -65,7 +65,7 @@ Reference: `stuywatch/ios/StuyWatch/Sources/App/StoreManager.swift`
 
 ## Server-Side Validation (Consumables)
 
-For consumables, the server must record what was purchased before the client finishes the transaction. Pattern from StuyWatch:
+For consumables, the server must record what was purchased before the client finishes the transaction. Pattern:
 
 ```
 1. Client calls product.purchase() → gets verified transaction

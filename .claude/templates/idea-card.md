@@ -41,7 +41,7 @@ Choose from the factory's current capabilities. If the idea needs something the 
 - [ ] iOS app (Swift — ios-templates + TestFlight playbook)
 - [ ] watchOS app (Swift — watchos-app-setup playbook, requires iPhone companion)
 - [ ] Web app (Next.js — web-app-setup playbook)
-- [ ] Consumer agent (WAD — chat-based, no traditional UI)
+- [ ] Consumer agent (chat-based, no traditional UI)
 - [ ] None (API/backend only)
 
 **Backend:**
@@ -66,10 +66,10 @@ Choose from the factory's current capabilities. If the idea needs something the 
 **Distribution:**
 - [ ] App Store (TestFlight → production)
 - [ ] Web (Cloud Run / Vercel)
-- [ ] WhatsApp / SMS (WAD + Twilio)
+- [ ] WhatsApp / SMS (Twilio)
 - [ ] API-only (other apps consume it)
 
-(Agent: fill this out based on the idea. If Paul gave a one-liner, make your best guess and flag anything uncertain in Open Questions.)
+(Agent: fill this out based on the idea. If only a one-liner was provided, make your best guess and flag anything uncertain in Open Questions.)
 
 ## Insights
 
@@ -77,5 +77,5 @@ Choose from the factory's current capabilities. If the idea needs something the 
 
 <!-- Example:
 - 2026-03-10: Xcode 26.3 MCP integration could speed up SwiftUI iteration for this app
-- 2026-03-15: Similar auth pattern already solved in sitta — reuse that approach
+- 2026-03-15: Similar auth pattern already solved in a sibling project — reuse that approach
 -->

@@ -1,4 +1,2 @@
 packages:
   - "packages/*"
-  - "koba237"
-  - "koba237/dashboard"

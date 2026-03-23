@@ -136,23 +136,6 @@ When values conflict, this is the priority order:
 
 ---
 
-## Paul's Position Relative to Teek
-
-- **12 years at Uber** — Paul joined around 2014, stayed through Teek's departure (2017) and beyond. Institutional veteran of Teek's creation.
-- **"Led external integration"** — platform/partnerships/API work. Potentially relevant to Atoms Transport ("wheelbase for robots" = platform play).
-- **"Done a little of everything"** — generalist who's touched many surfaces of a company Teek built. Knows the organism.
-- **Building with AI tools (Claude Code)** — shipping 8 apps from a monorepo with AI as co-builder. Not theoretical AI interest — practical, daily, productive.
-- **Has real optionality** — not between Atoms and unemployment, but between Atoms and his own portfolio of live products. This is the strongest positioning signal.
-- **The Uber connection is the unlock.** Teek hires people he's worked with (Levandowski pattern). Paul is from the tribe. The question Teek will ask himself: "What did this person build while I was gone?"
-
----
-
-## Context Files
-
-| File | What it covers |
-|------|---------------|
-| `context/atoms.md` | Atoms company intelligence — divisions, people, strategy, narrative vs. reality |
-
 ## How to Use This Profile
 
 When asking "how would Teek respond to X?", weight these factors:

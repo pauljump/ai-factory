@@ -5,15 +5,15 @@
 
   Update rules for Claude:
   - Sections marked 🔓 AUTO-UPDATE: Update freely as you work. These are facts.
-  - Sections marked 🔒 ASK PAUL: Only update with Paul's explicit input.
-  - When you discover something that belongs in a 🔒 section, surface it to Paul
+  - Sections marked 🔒 ASK OPERATOR: Only update with the operator's explicit input.
+  - When you discover something that belongs in a 🔒 section, surface it to the operator
     and update only after he confirms.
   - When you update a 🔓 section, mention it briefly ("Updated CLAUDE.md with the new endpoint").
   - Delete this comment block after initial setup.
 -->
 
 ## What This Is
-<!-- 🔒 ASK PAUL — this is the product vision, not a technical summary -->
+<!-- 🔒 ASK OPERATOR — this is the product vision, not a technical summary -->
 
 (One paragraph. What problem does this solve, for whom, and why does it matter.)
 
@@ -24,9 +24,9 @@ This project follows the monorepo collaboration protocol. See root `CLAUDE.md` f
 1. Scout first, code never — investigate and present before building
 2. Surface every decision — no stealth choices
 3. Tight loops — check in after meaningful progress
-4. Paul's "this feels wrong" is your most valuable signal
+4. the operator's "this feels wrong" is your most valuable signal
 5. **Git: commit to main, no branches** — no feature branches, no worktrees. Push directly to main. Always.
-6. **Session handoff** — when Paul ends a session, update `## Current State` below with what shipped, what's next, and what's blocking. See `.claude/playbooks/session-handoff.md`.
+6. **Session handoff** — when the operator ends a session, update `## Current State` below with what shipped, what's next, and what's blocking. See `.claude/playbooks/session-handoff.md`.
 
 ## Architecture
 <!-- 🔓 AUTO-UPDATE as code changes -->
@@ -65,12 +65,12 @@ This project follows the monorepo collaboration protocol. See root `CLAUDE.md` f
 (APIs, services, databases this project talks to. What can break that we don't control.)
 
 ## Design Principles
-<!-- 🔒 ASK PAUL — these are product decisions -->
+<!-- 🔒 ASK OPERATOR — these are product decisions -->
 
 (Rules that guide what we build and how. Hard constraints. The "why" behind architectural choices.)
 
 ## What NOT to Build
-<!-- 🔒 ASK PAUL — only Paul adds to this list -->
+<!-- 🔒 ASK OPERATOR — only the operator adds to this list -->
 
 (Explicit scope boundaries. Features we've decided against and why.)
 
@@ -94,6 +94,6 @@ This project follows the monorepo collaboration protocol. See root `CLAUDE.md` f
 **What's blocking:**
 
 ## Success Metrics
-<!-- 🔒 ASK PAUL — he defines what winning looks like -->
+<!-- 🔒 ASK OPERATOR — he defines what winning looks like -->
 
 (How do we know this project is working? Concrete targets, not vibes.)

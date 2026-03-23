@@ -66,9 +66,9 @@ The system prompt is constructed: kind-specific instructions + profile + context
 
 ## Used In
 
-The factory pipeline (`koba237`) uses teek personas as a multi-stage evaluation gate:
-1. **Gate:** Naval + PG + Travis vote on ideas (2/3 must advance)
-2. **Panel:** Domain-specific pairs from the remaining personas evaluate deeper
+The factory's evaluation pipeline uses teek personas as a multi-stage gate:
+1. **Gate:** 3 personas vote on ideas (2/3 must advance)
+2. **Panel:** Domain-specific pairs evaluate deeper — strategy, economics, growth, UX
 
 ## Stack
 

@@ -85,7 +85,7 @@ Physical AI requires: land, real estate development, minerals, energy access. Ma
 
 2. **Ghost kitchens → mining → transport arc.** The manifesto frames this as natural progression ("R&D lab → harder industries"). But CloudKitchens was under real pressure — the Atoms rebrand transforms a struggling venture into a proof-of-concept narrative. This may be retroactive storytelling. The 8-year stealth framing does a lot of heavy lifting.
 
-3. **"Moore's Law squared" and "Valuable Unknown Truths."** Empty claims with no empirical grounding. These are the kind of things you say to investors, not to engineers. If Paul gets into a conversation, these phrases are signals of pitch mode, not building mode.
+3. **"Moore's Law squared" and "Valuable Unknown Truths."** Empty claims with no empirical grounding. These are the kind of things you say to investors, not to engineers. These phrases are signals of pitch mode, not building mode.
 
 4. **Autonomous futures vision.** Om notes this mirrors 2017-era pitch decks almost exactly. The timing question: is Atoms ahead of the market, or recycling the same vision with better branding?
 
@@ -97,7 +97,7 @@ Physical AI requires: land, real estate development, minerals, energy access. Ma
 
 3. **Real estate as infrastructure.** Land control provides competitive advantage in physical AI that's often overlooked. This was true with CloudKitchens and would be true in mining/transport. Teek's instinct for real estate as a platform layer is pattern-consistent.
 
-4. **The reunion hiring pattern.** Levandowski acquisition confirms it. This is how he actually builds — not through the manifesto, but through loyalty networks. Paul's positioning plays directly into the one thing that's clearly verified.
+4. **The reunion hiring pattern.** Levandowski acquisition confirms it. This is how he actually builds — not through the manifesto, but through loyalty networks.
 
 **The meta-signal:**
 

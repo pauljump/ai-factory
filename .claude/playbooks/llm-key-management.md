@@ -1,6 +1,6 @@
 # Playbook: LLM API Key Management
 
-Learned from: Orchard (2026-03-11)
+Learned from: production deployments
 
 ## Principle
 
@@ -11,8 +11,8 @@ One API key per app, per provider, per environment. Never share keys across apps
 ```
 OpenAI org
 ├── testing/          ← dev keys for all apps (shared project is fine for dev)
-├── orchard-prod/     ← production key for Orchard
-├── wad-prod/         ← production key for WAD
+├── app-a-prod/       ← production key for App A
+├── app-b-prod/       ← production key for App B
 └── <app>-prod/       ← one per deployed app
 ```
 
@@ -57,7 +57,7 @@ This is app-level logic, not llm-kit's job. llm-kit just takes a key and uses it
 
 - Check provider dashboards weekly during active development
 - Set billing alerts at $10/day per app (adjust as usage patterns emerge)
-- The spawn conversation is the most expensive moment (GPT-4o / Sonnet, multi-turn). Network chat uses the cheap model (GPT-4o-mini / Haiku).
+- Multi-turn conversations with top-tier models are the most expensive moment. Use cheaper models for high-volume, low-complexity calls.
 
 ## Gotchas
 

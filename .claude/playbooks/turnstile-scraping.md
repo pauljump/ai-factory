@@ -2,7 +2,7 @@
 
 How to scrape websites protected by Cloudflare Turnstile CAPTCHA.
 
-Learned from: foundry BACB certificant registry scrape (2026-03-14)
+Learned from: production registry scrape (2026-03-14)
 
 ## When to Use This
 
@@ -137,24 +137,18 @@ Most registries let you search by state/region. Iterate state by state:
 5. **Invisible mode = 401 on attestation.** If you see `challenges.cloudflare.com/.../pat/` returning 401, the browser is failing fingerprint checks. Switch to Approach 2 or 3.
 6. **Respect terms of service.** Many registries prohibit bulk scraping. Use data for verification/consumer safety, not resale.
 
-## Case Study: BACB Certificant Registry (2026-03-14)
+## Case Study: Professional Certificant Registry
 
-**Target:** bacb.com/services/o.php?page=101135 — 81K BCBAs, server-rendered HTML tables
+**Target:** A professional certification registry — 81K records, server-rendered HTML tables
 **Turnstile mode:** Invisible (hidden input, no iframe/checkbox renders)
 **puppeteer-real-browser result:** Failed — 401 on attestation endpoint, token never populated
-**Resolution:** Verification-on-demand approach (see GitHub issue). Paid solver (~$200 for full scrape) remains an option if bulk data is needed later.
+**Resolution:** Verification-on-demand approach. Paid solver (~$200 for full scrape) remains an option if bulk data is needed later.
 
 **What we learned:**
 - Turnstile JS loads and executes, but the invisible challenge fails silently
 - The form uses `input[name="cf-turnstile-response"]` (not textarea)
 - All results load in one page (DataTables does client-side pagination only)
 - Form fields: certType checkboxes, status checkboxes, country/state selects, terms checkbox
-- Script at `foundry/server-v2/src/scripts/scrape-bacb-registry.ts` is structurally complete — just needs a working token source
-
-## Reference Implementations
-
-- `foundry/server-v2/src/scripts/scrape-bacb-registry.ts` — BACB scraper (needs token source)
-- `foundry/server-v2/src/scripts/download-npi.mjs` — state-by-state partitioning pattern (no Turnstile)
 
 ## When NOT to Use This
 

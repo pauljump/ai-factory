@@ -1,6 +1,6 @@
 # Playbook: iOS TestFlight Push
 
-Learned from: PaperClaw (2026-03-09)
+Learned from: production iOS deployments
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ Create at `/tmp/ExportOptions.plist`:
 <plist version="1.0">
 <dict>
     <key>method</key><string>app-store-connect</string>
-    <key>teamID</key><string>99US464DK4</string>
+    <key>teamID</key><string>YOUR_TEAM_ID</string>
     <key>destination</key><string>upload</string>
     <key>signingStyle</key><string>automatic</string>
 </dict>
@@ -62,7 +62,7 @@ Create at `/tmp/ExportOptions.plist`:
 - **Archive destination is `generic/platform=iOS`** — not a specific device ID
 - **Processing takes 5-15 min** after upload before the build appears in TestFlight
 - **"Missing Compliance" prompt** — add `ITSAppUsesNonExemptEncryption = false` to Info.plist to skip this automatically (unless your app uses custom encryption beyond standard HTTPS)
-- **iMessage sticker icon set** — requires specific idiom format in stickersiconset Contents.json. See PaperClaw's implementation for the working format.
+- **iMessage sticker icon set** — requires specific idiom format in stickersiconset Contents.json.
 
 ## App Registry
 
@@ -72,15 +72,7 @@ To create: App Store Connect → Apps → "+" → New App → iOS → set Name, 
 
 | App | Bundle ID | SKU | Apple ID | Team |
 |-----|-----------|-----|----------|------|
-| PaperClaw | com.paperclaw.app | paperclaw | — | 99US464DK4 |
-| Kit Home | com.kit.home | kithome | — | 99US464DK4 |
-| Orchard | com.astral.app | orchard | — | 99US464DK4 |
-| Kit Lab | com.kit.lab | kitlab | — | 99US464DK4 |
-| StuyWatch | com.stuywatch.app | stuywatch | — | 99US464DK4 |
-| YardShare | com.yardshare.app | yardshare | — | 99US464DK4 |
-| BARkey | com.barkey.app | barkey | — | 99US464DK4 |
-| BooWho | com.boowho.app | boowho | — | 99US464DK4 |
-| Kit Tools | com.kit.tools | kittools | — | 99US464DK4 |
+| MyApp | com.myapp.app | myapp | — | YOUR_TEAM_ID |
 
 ## Verification
 

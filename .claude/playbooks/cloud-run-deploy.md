@@ -2,7 +2,7 @@
 
 Everything about deploying to GCP Cloud Run. This is the single reference — infrastructure, deploy steps, secrets, databases, cost controls.
 
-Learned from: PaperClaw, shared infra buildout (2026-03-10), web app factory (2026-03-11)
+Learned from: production deployments and web app factory buildout
 
 ## Why Cloud Run
 
@@ -10,7 +10,7 @@ Learned from: PaperClaw, shared infra buildout (2026-03-10), web app factory (20
 - One command deploy: `gcloud run deploy`
 - Zero server management: no SSH, no patching, no disk monitoring
 - Auto SSL, custom domains, built-in logging and monitoring
-- GCP account: `pjump007@gmail.com`
+- GCP account: (your GCP account)
 
 Decision date: 2026-03-07. Previous option (Coolify on Hetzner) rejected — self-hosting wastes time, your scarcest resource.
 
@@ -34,8 +34,8 @@ Decision date: 2026-03-07. Previous option (Coolify on Hetzner) rejected — sel
 
 ```bash
 gcloud auth login
-gcloud projects create pauljump-prod --name="Production"
-gcloud config set project pauljump-prod
+gcloud projects create your-project-id --name="Production"
+gcloud config set project your-project-id
 gcloud services enable run.googleapis.com
 gcloud services enable secretmanager.googleapis.com
 ```
@@ -146,9 +146,9 @@ Stored once with a generic name. Any Cloud Run service can reference them.
 
 | Secret name | What | Used by |
 |---|---|---|
-| `OPENAI_API_KEY` | OpenAI API key | kithome-api, any LLM service |
-| `ANTHROPIC_API_KEY` | Anthropic API key | kitlab-api, any Claude service |
-| `GOOGLE_PLACES_API_KEY` | Google Places API key | kithome-api |
+| `OPENAI_API_KEY` | OpenAI API key | any LLM service |
+| `ANTHROPIC_API_KEY` | Anthropic API key | any Claude service |
+| `GOOGLE_PLACES_API_KEY` | Google Places API key | any service needing Places |
 
 ### Per-app secrets
 
@@ -156,21 +156,21 @@ Namespaced with app prefix: `APPNAME_SECRETNAME`.
 
 | Secret name | What | Used by |
 |---|---|---|
-| `KITHOME_JWT_SECRET` | JWT signing key | kithome-api |
+| `MYAPP_JWT_SECRET` | JWT signing key | myapp-api |
 
 ### How to use
 
 ```bash
 # Create a new shared secret
-echo -n "sk_live_xxx" | gcloud secrets create SECRET_NAME --project=pauljump-prod --data-file=-
+echo -n "sk_live_xxx" | gcloud secrets create SECRET_NAME --project=your-project-id --data-file=-
 
 # Create a per-app secret (use APPNAME_ prefix)
-echo -n "supersecret" | gcloud secrets create MYAPP_JWT_SECRET --project=pauljump-prod --data-file=-
+echo -n "supersecret" | gcloud secrets create MYAPP_JWT_SECRET --project=your-project-id --data-file=-
 
 # Grant Cloud Run service account access (once per secret)
 gcloud secrets add-iam-policy-binding SECRET_NAME \
-  --project=pauljump-prod \
-  --member="serviceAccount:988719556625-compute@developer.gserviceaccount.com" \
+  --project=your-project-id \
+  --member="serviceAccount:<PROJECT_NUMBER>-compute@developer.gserviceaccount.com" \
   --role="roles/secretmanager.secretAccessor"
 
 # Reference in deploy (maps secret to env var)
@@ -185,7 +185,7 @@ gcloud run deploy <service-name> \
 ### Convention
 
 - **Shared keys** use the generic env var name (e.g., `OPENAI_API_KEY` → `OPENAI_API_KEY`)
-- **Per-app keys** use the `APPNAME_` prefix in Secret Manager but map to the generic env var name in the service (e.g., `KITHOME_JWT_SECRET` → `JWT_SECRET`)
+- **Per-app keys** use the `APPNAME_` prefix in Secret Manager but map to the generic env var name in the service (e.g., `MYAPP_JWT_SECRET` → `JWT_SECRET`)
 - **When adding a new shared secret:** update the table above so future sessions know it exists
 - **Never commit secrets to code** — always use Secret Manager
 

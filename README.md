@@ -49,7 +49,7 @@ The pipeline also enforces a **stack check**: if the factory doesn't support wha
 packages/                   ← Shared infrastructure (21 packages)
   api-kit/                  ← Server framework (Fastify + SQLite + JWT + cron)
   llm-kit/                  ← Provider-agnostic LLM client (OpenAI ↔ Anthropic, tool use)
-  teek/                     ← Persona engine (16 personas, 12 roles, 2 agents)
+  roundtable/               ← Persona engine → now its own repo (github.com/pauljump/roundtable)
   voice-kit/                ← Real-time voice (OpenAI Realtime API, WebSocket)
   document-kit/             ← OCR + structured extraction (Claude vision + Zod)
   etl-kit/                  ← Data pipelines (retry, rate limit, scrape, orchestrate)
@@ -73,16 +73,15 @@ const result = await client.chat(messages, { tools });
 // Switch to OpenAI by changing one string. Same result shape.
 ```
 
-### Persona Engine — `teek`
+### Persona Engine — [Roundtable](https://github.com/pauljump/roundtable)
 
-16 AI personas built from verified source material. 12 professional roles. 2 autonomous agents. Each entity is a filesystem-based profile that constructs LLM system prompts — profiles define what the agent knows and how it thinks.
+16 AI personas built from verified source material. 12 professional roles. Each entity is a filesystem-based profile that constructs LLM system prompts — profiles define what the agent knows and how it thinks. Now its own standalone repo.
 
-Beyond the idea evaluation pipeline, personas power strategy sessions (simulated advisory boards for product decisions), code review (a Staff Engineer persona reviews architecture), and autonomous background scanning (the Spotter watches for cross-project patterns during active development sessions).
+Beyond the idea evaluation pipeline, personas power strategy sessions (simulated advisory boards for product decisions) and code review (a Staff Engineer persona reviews architecture).
 
 ```bash
-pnpm ask --persona naval "Should we build or buy?"
-pnpm ask --role staff-eng "Review this architecture"
-pnpm ask --agent spotter  # autonomous background scanner
+npx tsx src/cli.ts --persona leverage "Should we build or buy?"
+npx tsx src/cli.ts --role staff-eng "Review this architecture"
 ```
 
 ### AI Agent Operating System — `.claude/`
@@ -125,7 +124,7 @@ A sample of products that shipped through the factory:
 | **Real-time voice agent** | Conversational AI with tool calling mid-sentence | api-kit, voice-kit, llm-kit |
 | **Writing style capturer** | Custom keyboard that builds a portable LLM prompt from your writing patterns | api-kit, llm-kit, ios-templates |
 | **Lawn care marketplace** | H3 hex-grid clustering with economics-based pricing | api-kit, geo-registry, web-templates |
-| **AI agent network** | Personal AI agents with persistent souls, traits, and agent-to-agent conversation | api-kit, llm-kit, teek, ios-templates |
+| **AI agent network** | Personal AI agents with persistent souls, traits, and agent-to-agent conversation | api-kit, llm-kit, roundtable, ios-templates |
 
 Each product took 1-3 sessions from idea to deployed. The shared packages meant most of the infrastructure was already built.
 
@@ -137,7 +136,7 @@ Each product took 1-3 sessions from idea to deployed. The shared packages meant 
 |---------|-------------|-----|
 | **api-kit** | Fastify server — JWT auth, SQLite (WAL), rate limiting, health check, HTTP client with retry, cron | ~415 |
 | **llm-kit** | Provider-agnostic LLM client — OpenAI + Anthropic, tool use | ~260 |
-| **teek** | Persona engine — 16 personas, 12 roles, 2 agents, CLI + library | ~257 |
+| **[roundtable](https://github.com/pauljump/roundtable)** | Persona engine — 16 personas, 12 roles, CLI + library (standalone repo) | ~257 |
 | **voice-kit** | Real-time voice — OpenAI Realtime API, WebSocket, tool calling mid-conversation | ~447 |
 | **document-kit** | OCR + structured extraction — Claude vision, Zod schemas | ~257 |
 | **etl-kit** | Data pipelines — exponential backoff, rate limiting, cheerio scraping, orchestrator | ~255 |
@@ -177,7 +176,9 @@ Each product took 1-3 sessions from idea to deployed. The shared packages meant 
 
 ## Related Work
 
-Research and frameworks that came out of building with this system:
+Research, tools, and frameworks that came out of building with this system:
+
+- **[roundtable](https://github.com/pauljump/roundtable)** — AI persona engine extracted from this factory. 16 cognitive profiles built from verified source material, adversarial idea evaluation pipeline. 199 ideas evaluated, 51% kill rate. The filter is the feature.
 
 - **[agentspawn](https://github.com/pauljump/agentspawn)** — A psychology-grounded framework for designing the first interaction between an AI agent and its maker. 10 principles from developmental psychology (Bowlby, Winnicott, Rogers), 18 personality archetypes for testing. Born from building the AI agent network listed above.
 

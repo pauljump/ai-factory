@@ -118,8 +118,8 @@ A sample of products that shipped through the factory:
 | Product | What It Does | Stack Used |
 |---------|-------------|------------|
 | **Care intelligence platform** | Scans a parent's email, builds a care team profile with gaps and recommendations in 90 seconds | api-kit, document-kit, llm-kit, ios-templates |
-| **Civic decision engine** | Connects your tax bill to actual government spending across 115 data sources | api-kit, etl-kit, socrata-kit, web-templates |
-| **Prediction market aggregator** | 120 live feeds from prediction markets, unified API | api-kit, etl-kit, job-queue, web-templates |
+| **[Civic decision engine](https://github.com/pauljump/findthemoney)** | Connects your tax bill to actual government spending across 115 data sources | api-kit, etl-kit, socrata-kit, web-templates |
+| **[Prediction market aggregator](https://github.com/pauljump/polyfeeds)** | 120 live feeds from prediction markets, unified API | api-kit, etl-kit, job-queue, web-templates |
 | **Tee time predictor** | Cancellation probability scoring for golf courses | api-kit, predict-kit, watch-kit, notify-kit |
 | **Real-time voice agent** | Conversational AI with tool calling mid-sentence | api-kit, voice-kit, llm-kit |
 | **Writing style capturer** | Custom keyboard that builds a portable LLM prompt from your writing patterns | api-kit, llm-kit, ios-templates |

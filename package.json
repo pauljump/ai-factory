@@ -1,20 +1,19 @@
 {
   "name": "koba",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
-  "private": true,
   "description": "The Factory — AI-powered compounding production system",
+  "bin": {
+    "koba": "./bin/koba.ts"
+  },
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "bootstrap": "node --import tsx scripts/bootstrap-knowledge.ts",
-    "scan": "node --import tsx scripts/scan-monorepo.ts",
-    "baseline": "node --import tsx scripts/extract-baseline.ts",
-    "rebuild-index": "node --import tsx scripts/rebuild-index.ts"
+    "test:watch": "vitest"
   },
   "dependencies": {
     "better-sqlite3": "^11.0.0",
+    "commander": "^14.0.3",
     "glob": "^11.0.0",
     "gray-matter": "^4.0.3"
   },

@@ -138,6 +138,6 @@ Full design spec with architecture, PDLC, metrics, risk register, and panel vali
 
 ## Author
 
-**Paul Jump** — 12 years at Uber building API ecosystems and operating models. Built this to answer: what happens when you treat product development as a manufacturing problem and AI agents as factory workers?
+**Paul Jump** — Built this to answer: what happens when you treat product development as a manufacturing problem and AI agents as factory workers?
 
 The answer: you ship faster, compound knowledge across projects, and every product you build makes the next one trivially easy to launch.

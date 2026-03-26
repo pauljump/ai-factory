@@ -1,4 +1,4 @@
-import type { Tracker } from './lib/analytics.js'
+import type { Tracker } from '../lib/analytics.js'
 
 export function logSessionEvent(
   tracker: Tracker,

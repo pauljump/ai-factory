@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
-import { extractBaseline } from '../src/baseline.js'
-import type { ProjectBaseline, ProjectScan } from '../src/types.js'
+import { extractBaseline } from '../src/engine/baseline.js'
+import type { ProjectBaseline, ProjectScan } from '../src/engine/types.js'
 
 const factoryRoot = new URL('..', import.meta.url).pathname
 const monorepoRoot = join(factoryRoot, '..')

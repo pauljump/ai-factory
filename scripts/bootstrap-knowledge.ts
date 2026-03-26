@@ -1,9 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import type { KnowledgeEntry } from '../src/types.js'
-import { serializeEntry } from '../src/write-entry.js'
-import { openFactoryDb } from '../src/db.js'
-import { createKnowledgeStore } from '../src/knowledge-store.js'
+import type { KnowledgeEntry } from '../src/engine/types.js'
+import { serializeEntry } from '../src/engine/write-entry.js'
+import { openFactoryDb } from '../src/engine/db.js'
+import { createKnowledgeStore } from '../src/engine/knowledge-store.js'
 
 const DOMAIN_KNOWLEDGE_PATH = path.resolve(import.meta.dirname, '../DOMAIN_KNOWLEDGE.md')
 const DB_PATH = path.resolve(import.meta.dirname, '../data/factory.db')

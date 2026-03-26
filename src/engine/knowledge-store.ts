@@ -1,5 +1,5 @@
 import type Database from 'better-sqlite3'
-import { search, rebuildSearchIndex } from './lib/search.js'
+import { search, rebuildSearchIndex } from '../lib/search.js'
 import type { KnowledgeEntry } from './types.js'
 
 export function createKnowledgeStore(db: Database.Database) {

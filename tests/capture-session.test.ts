@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import Database from 'better-sqlite3'
-import { initFactoryDb } from '../src/db.js'
+import { initFactoryDb } from '../src/engine/db.js'
 import { createTracker } from '../src/lib/analytics.js'
-import { logSessionEvent, getSessionMetrics } from '../src/capture-session.js'
+import { logSessionEvent, getSessionMetrics } from '../src/engine/capture-session.js'
 
 describe('capture-session', () => {
   let db: Database.Database

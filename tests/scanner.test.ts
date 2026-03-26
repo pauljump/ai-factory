@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { scanProject } from '../src/scanner.js'
+import { scanProject } from '../src/engine/scanner.js'
 import { mkdirSync, writeFileSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'

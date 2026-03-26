@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseEntry } from '../src/parse-entry.js'
+import { parseEntry } from '../src/engine/parse-entry.js'
 
 describe('parseEntry', () => {
   it('parses a well-formed knowledge entry', () => {

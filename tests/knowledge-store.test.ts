@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import Database from 'better-sqlite3'
-import { initFactoryDb } from '../src/db.js'
-import { createKnowledgeStore } from '../src/knowledge-store.js'
-import type { KnowledgeEntry } from '../src/types.js'
+import { initFactoryDb } from '../src/engine/db.js'
+import { createKnowledgeStore } from '../src/engine/knowledge-store.js'
+import type { KnowledgeEntry } from '../src/engine/types.js'
 
 function makeEntry(overrides: Partial<KnowledgeEntry> = {}): KnowledgeEntry {
   return {

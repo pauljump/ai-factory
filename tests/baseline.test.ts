@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { estimateSessions, detectCategory } from '../src/baseline.js'
+import { estimateSessions, detectCategory } from '../src/engine/baseline.js'
 
 describe('estimateSessions', () => {
   it('clusters commits within 4 hours into sessions', () => {

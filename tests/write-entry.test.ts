@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { serializeEntry } from '../src/write-entry.js'
-import { parseEntry } from '../src/parse-entry.js'
-import type { KnowledgeEntry } from '../src/types.js'
+import { serializeEntry } from '../src/engine/write-entry.js'
+import { parseEntry } from '../src/engine/parse-entry.js'
+import type { KnowledgeEntry } from '../src/engine/types.js'
 
 describe('serializeEntry', () => {
   it('round-trips a knowledge entry through serialize then parse', () => {

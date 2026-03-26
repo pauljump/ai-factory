@@ -1,8 +1,8 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, basename } from 'node:path'
-import { openFactoryDb } from '../src/db.js'
-import { createKnowledgeStore } from '../src/knowledge-store.js'
-import { parseEntry } from '../src/parse-entry.js'
+import { openFactoryDb } from '../src/engine/db.js'
+import { createKnowledgeStore } from '../src/engine/knowledge-store.js'
+import { parseEntry } from '../src/engine/parse-entry.js'
 
 const factoryRoot = new URL('..', import.meta.url).pathname
 const knowledgeDir = join(factoryRoot, 'knowledge')

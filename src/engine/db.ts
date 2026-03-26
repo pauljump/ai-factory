@@ -1,6 +1,6 @@
 import Database from 'better-sqlite3'
-import { createSearchIndex } from './lib/search.js'
-import { initAnalyticsTables } from './lib/analytics.js'
+import { createSearchIndex } from '../lib/search.js'
+import { initAnalyticsTables } from '../lib/analytics.js'
 
 export function initFactoryDb(db: Database.Database): void {
   db.pragma('journal_mode = WAL')

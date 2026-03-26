@@ -1,0 +1,7 @@
+data/factory.db
+data/factory.db-wal
+data/factory.db-shm
+data/scan-results.json
+data/baselines.json
+node_modules/
+dist/

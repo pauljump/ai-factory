@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-26
 **Status:** Designed — ready for implementation planning
-**Author:** Paul Jump + Claude (collaborative design session)
+**Author:** Paul Jump
 **Validated by:** 12-persona + 6-role teek panel, competitive landscape research
 
 ---

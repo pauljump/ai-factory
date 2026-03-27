@@ -5,6 +5,7 @@ import { join } from 'node:path'
 import { openFactoryDb } from '../engine/db.js'
 import { createKnowledgeStore } from '../engine/knowledge-store.js'
 import { regenerateClaudeMd } from '../engine/claude-md-gen.js'
+import { loadPlaybooks } from '../engine/playbook-store.js'
 
 export async function scanCommand(): Promise<void> {
   const ws = requireWorkspace()
@@ -38,6 +39,31 @@ export async function scanCommand(): Promise<void> {
       console.log(`  ${pkg}: ${count} projects`)
     }
   }
+
+  // Playbook summary
+  const playbooks = loadPlaybooks(ws.playbooks)
+  if (playbooks.length > 0) {
+    console.log(`\nPlaybooks: ${playbooks.length}`)
+    const stale = playbooks.filter(p => {
+      if (!p.lastVerified) return true
+      const days = (Date.now() - new Date(p.lastVerified).getTime()) / (1000 * 60 * 60 * 24)
+      return days > 90
+    })
+    if (stale.length > 0) {
+      console.log(`  ${stale.length} stale (not verified in 90+ days):`)
+      for (const p of stale) {
+        console.log(`    - ${p.name} (last: ${p.lastVerified || 'never'})`)
+      }
+    }
+  }
+
+  // Soul check
+  if (existsSync(ws.soul)) {
+    console.log('\nSoul: present')
+  } else {
+    console.log('\nSoul: missing (run koba convert to seed)')
+  }
+
   console.log(`\nResults saved to data/scan-results.json`)
 
   // Regenerate CLAUDE.md

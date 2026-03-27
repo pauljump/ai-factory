@@ -6,11 +6,14 @@ export interface WorkspacePaths {
   projects: string
   packages: string
   knowledge: string
+  playbooks: string
+  research: string
   data: string
   scorecards: string
   config: string
   db: string
   claudeMd: string
+  soul: string
 }
 
 export function findWorkspaceRoot(startDir: string): string | null {
@@ -33,11 +36,14 @@ export function getWorkspacePaths(root: string): WorkspacePaths {
     projects: join(root, 'projects'),
     packages: join(root, 'packages'),
     knowledge: join(root, 'knowledge'),
+    playbooks: join(root, 'playbooks'),
+    research: join(root, 'research'),
     data: join(root, 'data'),
     scorecards: join(root, 'scorecards'),
     config: join(root, 'koba.json'),
     db: join(root, 'data', 'factory.db'),
     claudeMd: join(root, 'CLAUDE.md'),
+    soul: join(root, 'soul.md'),
   }
 }
 

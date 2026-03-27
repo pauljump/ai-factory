@@ -3,6 +3,8 @@ import { openFactoryDb } from '../engine/db.js'
 import { createKnowledgeStore } from '../engine/knowledge-store.js'
 import { createTracker } from '../lib/analytics.js'
 import { getSessionMetrics } from '../engine/capture-session.js'
+import { loadPlaybooks } from '../engine/playbook-store.js'
+import { readSoul } from '../engine/soul.js'
 import { readFileSync, existsSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
@@ -13,6 +15,11 @@ export async function statusCommand(): Promise<void> {
   console.log(`\nTHE FACTORY: ${config.name}`)
   console.log('\u2500'.repeat(40))
 
+  // Soul
+  const soul = readSoul(ws.soul)
+  console.log(`\nSoul: ${soul ? 'present' : 'missing'}`)
+
+  // Projects
   let activeProjects = 0
   let archivedProjects = 0
   try {
@@ -31,9 +38,39 @@ export async function statusCommand(): Promise<void> {
       .filter(d => d.isDirectory()).length
   } catch { /* packages dir might not exist */ }
 
-  console.log(`\nProjects: ${activeProjects} active, ${archivedProjects} archived`)
+  console.log(`Projects: ${activeProjects} active, ${archivedProjects} archived`)
   console.log(`Packages: ${packageCount} shared`)
 
+  // Playbooks
+  const playbooks = loadPlaybooks(ws.playbooks)
+  if (playbooks.length > 0) {
+    const highConf = playbooks.filter(p => p.confidence === 'high').length
+    const templateOnly = playbooks.filter(p => p.confidence === 'low').length
+    console.log(`Playbooks: ${playbooks.length} (${highConf} battle-tested, ${templateOnly} templates)`)
+
+    const stalePlaybooks = playbooks.filter(p => {
+      if (!p.lastVerified) return true
+      return (Date.now() - new Date(p.lastVerified).getTime()) / (1000 * 60 * 60 * 24) > 90
+    })
+    if (stalePlaybooks.length > 0) {
+      console.log(`  \u26a0 ${stalePlaybooks.length} stale: ${stalePlaybooks.map(p => p.name).join(', ')}`)
+    }
+  } else {
+    console.log('Playbooks: none')
+  }
+
+  // Research
+  let researchCount = 0
+  try {
+    if (existsSync(ws.research)) {
+      researchCount = countMdFiles(ws.research)
+    }
+  } catch { /* */ }
+  if (researchCount > 0) {
+    console.log(`Research: ${researchCount} files`)
+  }
+
+  // Knowledge
   if (existsSync(ws.db)) {
     const db = openFactoryDb(ws.db)
     const store = createKnowledgeStore(db)
@@ -49,8 +86,8 @@ export async function statusCommand(): Promise<void> {
 
     console.log(`Knowledge: ${entries.length} entries across ${byDomain.size} domains`)
     if (byDomain.size > 0) {
-      const top3 = [...byDomain.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3)
-      console.log(`  Top: ${top3.map(([d, c]) => `${d} (${c})`).join(', ')}`)
+      const top5 = [...byDomain.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5)
+      console.log(`  Top: ${top5.map(([d, c]) => `${d} (${c})`).join(', ')}`)
     }
 
     const stale = entries.filter(e => {
@@ -71,4 +108,15 @@ export async function statusCommand(): Promise<void> {
   }
 
   console.log('')
+}
+
+function countMdFiles(dir: string): number {
+  let count = 0
+  try {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      if (entry.isDirectory()) count += countMdFiles(join(dir, entry.name))
+      else if (entry.name.endsWith('.md')) count++
+    }
+  } catch { /* */ }
+  return count
 }

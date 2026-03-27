@@ -16,11 +16,13 @@ export async function hookCommand(event: string, cwd?: string): Promise<void> {
       const store = createKnowledgeStore(db)
       const tracker = createTracker(db)
       const context = detectProjectContext(dir)
-      const injection = buildInjection(store, context)
+      const injection = buildInjection(store, context, ws)
 
       logSessionEvent(tracker, 'session_start', {
         project: context.projectName,
         entriesInjected: injection.entries.length,
+        playbooksInjected: injection.playbooks.length,
+        hasSoul: injection.hasSoul,
         tags: context.tags,
       })
 

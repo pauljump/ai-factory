@@ -1,9 +1,13 @@
-import { readFileSync, existsSync, readdirSync, writeFileSync } from 'node:fs'
+import { readFileSync, existsSync, readdirSync } from 'node:fs'
+import { writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 import type { WorkspacePaths } from '../workspace.js'
-import type { ProjectScan, KnowledgeEntry } from './types.js'
+import type { ProjectScan, KnowledgeEntry, Playbook } from './types.js'
+import { loadPlaybooks } from './playbook-store.js'
+import { extractConventions, formatConventions } from './conventions.js'
 
 /**
- * Regenerate the auto-generated sections of CLAUDE.md
+ * Regenerate the auto-generated sections of CLAUDE.md.
  * Preserves everything between koba:user-start and koba:user-end markers.
  */
 export function regenerateClaudeMd(
@@ -16,11 +20,17 @@ export function regenerateClaudeMd(
   const content = readFileSync(ws.claudeMd, 'utf-8')
   const config = JSON.parse(readFileSync(ws.config, 'utf-8'))
 
+  // Load playbooks
+  const playbooks = loadPlaybooks(ws.playbooks)
+
   // Generate auto sections
   const stackSection = generateStackSection(config)
   const projectsSection = generateProjectsSection(scans)
   const packagesSection = generatePackagesSection(ws)
   const knowledgeSection = generateKnowledgeSection(knowledgeEntries)
+  const playbooksSection = generatePlaybooksSection(playbooks)
+  const conventionsSection = generateConventionsSection(ws, scans)
+  const healthSection = generateHealthSection(ws, scans, playbooks, knowledgeEntries)
 
   // Replace auto sections, preserve user sections
   let updated = content
@@ -28,6 +38,9 @@ export function regenerateClaudeMd(
   updated = replaceAutoSection(updated, 'active-projects', projectsSection)
   updated = replaceAutoSection(updated, 'packages', packagesSection)
   updated = replaceAutoSection(updated, 'knowledge', knowledgeSection)
+  updated = replaceAutoSection(updated, 'playbooks', playbooksSection)
+  updated = replaceAutoSection(updated, 'conventions', conventionsSection)
+  updated = replaceAutoSection(updated, 'health', healthSection)
 
   writeFileSync(ws.claudeMd, updated)
 }
@@ -107,4 +120,96 @@ function generateKnowledgeSection(entries: KnowledgeEntry[]): string {
   }
 
   return lines.join('\n') + '\n'
+}
+
+function generatePlaybooksSection(playbooks: Playbook[]): string {
+  if (playbooks.length === 0) return '## Playbooks\n\nNo playbooks yet. They\'ll be created as you work.\n'
+
+  const lines = ['## Playbooks\n']
+  lines.push(`${playbooks.length} playbooks available:\n`)
+  lines.push('| Playbook | Projects | Confidence | Triggers |')
+  lines.push('|----------|----------|------------|----------|')
+
+  for (const p of playbooks) {
+    lines.push(`| ${p.name} | ${p.projectsUsing.length} | ${p.confidence} | ${p.triggers.slice(0, 3).join(', ')} |`)
+  }
+
+  return lines.join('\n') + '\n'
+}
+
+function generateConventionsSection(ws: WorkspacePaths, scans: ProjectScan[]): string {
+  // Re-extract conventions from project CLAUDE.md files in the workspace
+  const projects = scans.map(s => ({
+    name: s.name,
+    path: join(ws.projects, s.name),
+    framework: s.framework,
+    hasClaudeMd: s.hasClaudeMd,
+    hasDeployConfig: s.hasDeployConfig,
+    activity: 'active' as const,
+    lastCommitDate: null,
+    commitCount: 0,
+    estimatedSessions: 0,
+    dependencies: s.dependencies,
+    sharedPackages: s.sharedPackages,
+  }))
+
+  const conventions = extractConventions(projects)
+  if (conventions.length === 0) return '## Factory Conventions\n\nNo conventions detected yet.\n'
+
+  return formatConventions(conventions)
+}
+
+function generateHealthSection(
+  ws: WorkspacePaths,
+  scans: ProjectScan[],
+  playbooks: Playbook[],
+  knowledge: KnowledgeEntry[],
+): string {
+  const lines = ['## Factory Health\n']
+
+  // Projects without CLAUDE.md
+  const noClaude = scans.filter(s => !s.hasClaudeMd)
+  if (noClaude.length > 0) {
+    lines.push(`**${noClaude.length} projects missing CLAUDE.md:** ${noClaude.map(s => s.name).join(', ')}`)
+    lines.push('')
+  }
+
+  // Stale playbooks (> 90 days since last_verified)
+  const now = Date.now()
+  const stalePlaybooks = playbooks.filter(p => {
+    if (!p.lastVerified) return true
+    const verified = new Date(p.lastVerified).getTime()
+    return (now - verified) / (1000 * 60 * 60 * 24) > 90
+  })
+  if (stalePlaybooks.length > 0) {
+    lines.push(`**${stalePlaybooks.length} stale playbooks:** ${stalePlaybooks.map(p => p.name).join(', ')}`)
+    lines.push('')
+  }
+
+  // Unused packages
+  const usedPackages = new Set(scans.flatMap(s => s.sharedPackages))
+  try {
+    const allPackages = readdirSync(ws.packages, { withFileTypes: true })
+      .filter(e => e.isDirectory())
+      .map(e => e.name)
+    const unused = allPackages.filter(p => !usedPackages.has(p) && !usedPackages.has(`@pauljump/${p}`))
+    if (unused.length > 0) {
+      lines.push(`**${unused.length} unused packages:** ${unused.join(', ')}`)
+      lines.push('')
+    }
+  } catch { /* packages dir might not exist */ }
+
+  // Template-only playbooks (no real project-specific content yet)
+  const templateOnly = playbooks.filter(p => p.confidence === 'low' && p.projectsUsing.length === 0)
+  if (templateOnly.length > 0) {
+    lines.push(`**${templateOnly.length} playbooks need real-world validation:** ${templateOnly.map(p => p.name).join(', ')}`)
+    lines.push('')
+  }
+
+  if (lines.length === 1) {
+    lines.push('Everything looks good.')
+    lines.push('')
+  }
+
+  return lines.join('\n')
 }

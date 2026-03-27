@@ -131,3 +131,47 @@ export interface ConversionPlan {
   knowledgeEntries: number
   summary: string
 }
+
+/** A playbook — executable knowledge, not just a fact */
+export interface Playbook {
+  /** Filename slug (e.g., "cloud-run-deploy") */
+  id: string
+  /** Human-readable name */
+  name: string
+  /** What triggers this playbook (framework tags, file patterns, etc.) */
+  triggers: string[]
+  /** Projects that use this pattern */
+  projectsUsing: string[]
+  /** When this was last verified as accurate */
+  lastVerified: string
+  /** Confidence: high = battle-tested, medium = used once, low = template only */
+  confidence: 'high' | 'medium' | 'low'
+  /** The full playbook content (markdown body) */
+  body: string
+}
+
+/** A convention detected across multiple projects */
+export interface Convention {
+  /** What the convention is (e.g., "commit to main, no branches") */
+  pattern: string
+  /** How many projects follow this convention */
+  projectCount: number
+  /** Which projects follow it */
+  projects: string[]
+  /** Source section in CLAUDE.md where this was found */
+  source: string
+}
+
+/** Soul — the factory's personality and collaboration style */
+export interface Soul {
+  /** Core principles for how the AI collaborates */
+  principles: string[]
+  /** Role definitions (who does what) */
+  roles: { name: string; description: string }[]
+  /** The collaboration loop */
+  loop: string[]
+  /** Constraints and corrections */
+  constraints: string[]
+  /** Full rendered markdown */
+  body: string
+}

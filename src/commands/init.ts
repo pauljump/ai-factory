@@ -15,7 +15,7 @@ export async function initCommand(target?: string): Promise<void> {
 
   console.log(`Creating factory workspace at ${dir}...\n`)
 
-  const dirs = ['projects', 'packages', 'knowledge', 'data', 'scorecards', '.claude']
+  const dirs = ['projects', 'packages', 'knowledge', 'playbooks', 'research', 'data', 'scorecards', '.claude']
   for (const d of dirs) {
     mkdirSync(join(dir, d), { recursive: true })
   }

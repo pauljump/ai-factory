@@ -1,7 +1,10 @@
 import { requireWorkspace } from '../workspace.js'
 import { scanAllProjects } from '../engine/scanner.js'
-import { writeFileSync, mkdirSync } from 'node:fs'
+import { writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
+import { openFactoryDb } from '../engine/db.js'
+import { createKnowledgeStore } from '../engine/knowledge-store.js'
+import { regenerateClaudeMd } from '../engine/claude-md-gen.js'
 
 export async function scanCommand(): Promise<void> {
   const ws = requireWorkspace()
@@ -36,4 +39,19 @@ export async function scanCommand(): Promise<void> {
     }
   }
   console.log(`\nResults saved to data/scan-results.json`)
+
+  // Regenerate CLAUDE.md
+  if (existsSync(ws.claudeMd)) {
+    let knowledgeEntries: import('../engine/types.js').KnowledgeEntry[] = []
+    try {
+      mkdirSync(ws.data, { recursive: true })
+      const db = openFactoryDb(ws.db)
+      const store = createKnowledgeStore(db)
+      knowledgeEntries = store.list()
+      db.close()
+    } catch { /* knowledge store might not be initialized */ }
+
+    regenerateClaudeMd(ws, scans, knowledgeEntries)
+    console.log('\nCLAUDE.md regenerated.')
+  }
 }

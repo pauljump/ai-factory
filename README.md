@@ -1,143 +1,100 @@
 # Koba
 
-A living system that turns a collection of projects into a compounding production environment. Not documentation — real code, real automation, real infrastructure.
+A CLI tool that turns a collection of projects into a compounding production environment.
 
-**The thesis:** AI alone produces prototypes. AI + a compounding system produces production-grade software at scale. Koba is that system.
+**The thesis:** AI alone produces prototypes. AI + a compounding system produces production-grade software at scale.
 
----
+## Install
 
-## What It Does
+```bash
+npm install -g koba
+```
 
-Point Koba at your projects. It scans them, learns your patterns, extracts domain knowledge, and builds a knowledge base that gets smarter with every session. The next time you start building, the system already knows what you know.
+## Usage
 
-**Three pillars:**
+### Create a factory workspace
 
-1. **Shared Knowledge** — A structured, growing knowledge base organized by domain. Captures expertise as you build. Researches expertise you don't have. Injects the right knowledge at the right moment via Claude Code hooks. Not markdown files you hope someone reads — a real system with FTS5 search that automatically loads what's relevant.
+```bash
+koba init my-factory
+cd my-factory
+```
 
-2. **Shared Code** — Scanner scripts find duplicated patterns across your projects, identify the best implementation, and extract into shared packages. The factory has opinions — it pushes toward standardization.
+Creates: `projects/`, `packages/`, `knowledge/`, `koba.json`, `CLAUDE.md`, Claude Code hooks — all wired and ready.
 
-3. **Shared Process** — The factory loop: Idea, Research, Build, Deploy, Polish, Iterate, Extract. Every cycle makes the factory smarter. New shared code extracted. New domain knowledge captured.
+### Import existing projects
+
+```bash
+koba convert ~/path/to/monorepo
+```
+
+Scans your projects, identifies shared patterns, harvests domain knowledge, and organizes everything into the factory workspace. *(Coming in v0.3)*
+
+### Check factory health
+
+```bash
+koba status
+```
+
+### Search knowledge
+
+```bash
+koba knowledge search "sqlite cloud run"
+koba knowledge stats
+koba knowledge rebuild
+```
+
+### Scan for patterns
+
+```bash
+koba scan
+```
 
 ## How It Works
 
-**Conversion (getting in):**
-1. Scanner analyzes all your projects — framework, dependencies, patterns, infrastructure
-2. AI reads the scan and makes judgment calls — what to standardize, what to extract, what knowledge to harvest
-3. You approve the plan. Koba builds a new structure with shared packages wired and knowledge base bootstrapped.
+Koba uses Claude Code to do the heavy lifting. The CLI provides structure — workspace layout, knowledge store, hooks. Claude Code provides intelligence — pattern recognition, knowledge harvesting, code extraction.
 
-**Living system (staying in):**
-- **SessionStart hook** detects what project you're in, queries the knowledge base, injects relevant expertise into your Claude Code session
-- **Stop hook** logs session metrics
-- **Knowledge capture** at session end — AI proposes what was learned, you approve or reject
-- Every session makes the next one faster
+**SessionStart hook:** Every Claude Code session gets relevant knowledge injected automatically based on what project you're in.
 
-## What's Built (Phase 0)
+**Knowledge capture:** At session end, new knowledge is proposed. You approve or reject.
+
+**Shared code extraction:** When koba finds the same pattern in 3+ projects, it recommends extracting a shared package.
+
+## What's Built
 
 | Component | Status |
 |-----------|--------|
-| Knowledge store (FTS5 search over structured markdown) | Working |
-| SessionStart hook (context-aware knowledge injection) | Working |
-| Stop hook (session metrics logging) | Working |
-| Project scanner (framework/dependency detection) | Working |
-| Baseline extraction (git history metrics) | Working |
-| Analytics wiring (automated event tracking) | Working |
-| Test suite (38 tests) | Passing |
-
-## Quick Start
-
-```bash
-git clone https://github.com/pauljump/koba.git
-cd koba
-npm install
-```
-
-### Bootstrap from existing knowledge
-
-If you have a `DOMAIN_KNOWLEDGE.md` file (a flat list of things you've learned across projects), convert it into structured entries:
-
-```bash
-# Edit scripts/bootstrap-knowledge.ts to point at your file
-npm run bootstrap
-```
-
-### Scan your projects
-
-```bash
-# Edit scripts/scan-monorepo.ts to point at your project root
-npm run scan
-npm run baseline
-```
-
-### Install hooks
-
-Add to your project's `.claude/settings.json`:
-
-```json
-{
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/path/to/koba/hooks/session-start.sh",
-            "timeout": 15
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/path/to/koba/hooks/stop.sh",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-Now every Claude Code session automatically gets relevant knowledge injected.
-
-## The PDLC
-
-Koba measures itself. Every project built through it gets a scorecard compared against a baseline of how you built things before. The thesis is testable: plot project number vs. sessions-to-production. Old way = flat line. Koba = declining curve.
-
-See [docs/the-factory-spec.md](docs/the-factory-spec.md) for the full design — metrics, go/no-go thresholds, phase gates, and kill criteria.
+| `koba init` — create factory workspace | Working |
+| `koba status` — factory dashboard | Working |
+| `koba scan` — project analysis | Working |
+| `koba knowledge` — search, rebuild, stats | Working |
+| `koba _hook` — Claude Code hook integration | Working |
+| Knowledge store (FTS5 search) | Working |
+| Session analytics | Working |
+| Test suite | 49 tests passing |
 
 ## What's Next
 
-**Phase 1** (in progress): Build 5 projects through Koba, measure against baselines, prove knowledge injection makes sessions measurably better.
-
-**Phase 2**: Extract shared packages from real patterns across projects. Prove code extraction works.
-
-**Phase 3**: Full factory loop — idea to production in 1-2 sessions. Deep research fills knowledge gaps automatically. Teek personas informed by accumulated knowledge.
-
-**Phase 4**: 50+ projects. Prove compounding. Open-source with measured evidence.
-
-See [docs/2026-03-26-factory-phase-0-plan.md](docs/2026-03-26-factory-phase-0-plan.md) for the Phase 0 implementation plan.
-
-## Design
-
-Full design spec with architecture, PDLC, metrics, risk register, and panel validation (12 personas + 6 roles):
-
-[docs/the-factory-spec.md](docs/the-factory-spec.md)
+| Feature | Version |
+|---------|---------|
+| `koba convert` — ingest existing monorepo | v0.3 |
+| Deep scanner (source-level analysis via Claude Code) | v0.3 |
+| `koba new` — create projects from templates | v0.4 |
+| CLAUDE.md auto-regeneration | v0.4 |
 
 ## Stack
 
-- TypeScript (ESM, Node 22, strict)
-- SQLite (better-sqlite3, FTS5 for knowledge search)
-- Claude Code hooks (SessionStart, Stop)
-- vitest for tests
+- TypeScript, Node 22, ESM
+- SQLite + FTS5 (knowledge search)
+- Claude Code hooks
+- pnpm workspaces
 
-## Author
+## Docs
 
-**Paul Jump** — Built this to answer: what happens when you treat product development as a manufacturing problem and AI agents as factory workers?
+- [v2 Design Spec](docs/2026-03-26-koba-v2-spec.md) — full architecture
+- [Original Factory Spec](docs/the-factory-spec.md) — thesis, PDLC, metrics
+- [Phase 0 Plan](docs/2026-03-26-factory-phase-0-plan.md)
+- [Sub-Project 1 Plan](docs/2026-03-26-sub1-cli-init-plan.md)
 
-The answer: you ship faster, compound knowledge across projects, and every product you build makes the next one trivially easy to launch.
+## License
+
+MIT

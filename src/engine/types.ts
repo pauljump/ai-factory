@@ -91,3 +91,43 @@ export interface Scorecard {
   sessionFeltFaster: boolean | null
   knownGotchaAvoided: string | null
 }
+
+/** Result of discovering projects and packages in a source directory */
+export interface DiscoveryResult {
+  projects: DiscoveredProject[]
+  packages: DiscoveredPackage[]
+  sourceRoot: string
+}
+
+export interface DiscoveredProject {
+  name: string
+  path: string
+  framework: string
+  hasClaudeMd: boolean
+  hasDeployConfig: boolean
+  activity: 'active' | 'dormant' | 'dead'
+  lastCommitDate: string | null
+  commitCount: number
+  estimatedSessions: number
+  dependencies: string[]
+  sharedPackages: string[]
+}
+
+export interface DiscoveredPackage {
+  name: string
+  path: string
+  consumers: number
+  consumerNames: string[]
+}
+
+export interface ConversionPlan {
+  source: string
+  workspace: string
+  projects: {
+    active: DiscoveredProject[]
+    archived: DiscoveredProject[]
+  }
+  packages: DiscoveredPackage[]
+  knowledgeEntries: number
+  summary: string
+}

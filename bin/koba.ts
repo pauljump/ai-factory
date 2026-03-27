@@ -24,6 +24,15 @@ program
   })
 
 program
+  .command('convert <source>')
+  .description('Import existing projects into the factory')
+  .option('--dry-run', 'Show conversion plan without executing')
+  .action(async (source: string, opts: { dryRun?: boolean }) => {
+    const { convertCommand } = await import('../src/commands/convert.js')
+    await convertCommand(source, opts.dryRun ?? false)
+  })
+
+program
   .command('scan')
   .description('Analyze all projects in the factory')
   .action(async () => {

@@ -1,5 +1,17 @@
 import { existsSync, cpSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+import { join, resolve, basename } from 'node:path'
+
+/** Directories to skip when copying projects/packages */
+const COPY_SKIP = new Set([
+  'node_modules', '.git', 'dist', '.next', '.turbo',
+  '.pnpm-store', '.swc', '__pycache__', '.build',
+  'DerivedData', 'build', '.gradle', 'Pods',
+])
+
+/** cpSync filter — skips build artifacts, deps, and VCS dirs */
+function copyFilter(src: string): boolean {
+  return !COPY_SKIP.has(basename(src))
+}
 import { requireWorkspace } from '../workspace.js'
 import { discoverSource } from '../engine/discover.js'
 import { harvestFromClaudeMd, harvestFromDomainKnowledge } from '../engine/harvester.js'
@@ -29,17 +41,28 @@ export async function convertCommand(source: string, dryRun: boolean): Promise<v
   console.log(`Found ${discovery.projects.length} projects, ${discovery.packages.length} packages\n`)
 
   console.log('CONVERSION PLAN')
-  console.log('\u2500'.repeat(40))
-  console.log(`\nProjects:`)
-  console.log(`  ${active.length} active \u2192 projects/`)
+  console.log('\u2500'.repeat(60))
+
+  console.log(`\nActive projects (${active.length}):`)
+  for (const p of active) {
+    const tags = [p.framework, p.hasClaudeMd ? 'CLAUDE.md' : '', p.hasDeployConfig ? 'deploy' : ''].filter(Boolean).join(', ')
+    console.log(`  ${p.name.padEnd(30)} ${tags}`)
+  }
+
   if (archived.length > 0) {
-    console.log(`  ${archived.length} archived \u2192 projects/_archive/`)
+    console.log(`\nArchived projects (${archived.length}):`)
+    for (const p of archived) {
+      console.log(`  ${p.name.padEnd(30)} last: ${p.lastCommitDate ?? 'unknown'}`)
+    }
   }
 
   if (discovery.packages.length > 0) {
-    console.log(`\nPackages:`)
+    console.log(`\nPackages (${discovery.packages.length}):`)
     for (const pkg of discovery.packages) {
-      console.log(`  ${pkg.name} (${pkg.consumers} consumers)`)
+      const consumers = pkg.consumerNames.length > 0
+        ? pkg.consumerNames.slice(0, 5).join(', ') + (pkg.consumerNames.length > 5 ? ` +${pkg.consumerNames.length - 5} more` : '')
+        : 'no consumers'
+      console.log(`  ${pkg.name.padEnd(25)} ${pkg.consumers} consumers (${consumers})`)
     }
   }
 
@@ -78,7 +101,7 @@ export async function convertCommand(source: string, dryRun: boolean): Promise<v
   for (const project of active) {
     const dest = join(ws.projects, project.name)
     if (!existsSync(dest)) {
-      cpSync(project.path, dest, { recursive: true })
+      cpSync(project.path, dest, { recursive: true, filter: copyFilter })
       console.log(`  \u2713 projects/${project.name}`)
     } else {
       console.log(`  \u2022 projects/${project.name} (already exists, skipped)`)
@@ -92,7 +115,7 @@ export async function convertCommand(source: string, dryRun: boolean): Promise<v
     for (const project of archived) {
       const dest = join(archiveDir, project.name)
       if (!existsSync(dest)) {
-        cpSync(project.path, dest, { recursive: true })
+        cpSync(project.path, dest, { recursive: true, filter: copyFilter })
         console.log(`  \u2713 projects/_archive/${project.name}`)
       }
     }
@@ -103,7 +126,7 @@ export async function convertCommand(source: string, dryRun: boolean): Promise<v
     const shortName = pkg.name.replace(/^@[^/]+\//, '')
     const dest = join(ws.packages, shortName)
     if (!existsSync(dest)) {
-      cpSync(pkg.path, dest, { recursive: true })
+      cpSync(pkg.path, dest, { recursive: true, filter: copyFilter })
       console.log(`  \u2713 packages/${shortName}`)
     }
   }

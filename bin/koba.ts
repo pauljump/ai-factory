@@ -59,6 +59,15 @@ program
   })
 
 program
+  .command('new <name>')
+  .description('Create a new project in the factory')
+  .option('-t, --type <type>', 'Project type: web, api, ios, pipeline, other', 'other')
+  .action(async (name: string, opts: { type: string }) => {
+    const { newCommand } = await import('../src/commands/new.js')
+    await newCommand(name, opts.type)
+  })
+
+program
   .command('_hook')
   .description('Internal: hook entry points')
   .argument('<event>', 'session-start | stop')

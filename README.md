@@ -10,44 +10,45 @@ A CLI tool that turns a collection of projects into a compounding production env
 npm install -g koba
 ```
 
-## Usage
-
-### Create a factory workspace
+## Quick Start
 
 ```bash
+# Create a new factory workspace
 koba init my-factory
 cd my-factory
+
+# Import your existing projects
+koba convert ~/path/to/your/monorepo
+
+# Or start a new project from scratch
+koba new my-app -t api
 ```
 
-Creates: `projects/`, `packages/`, `knowledge/`, `koba.json`, `CLAUDE.md`, Claude Code hooks — all wired and ready.
+## Commands
 
-### Import existing projects
+### `koba init [name]`
 
-```bash
-koba convert ~/path/to/monorepo
-```
+Creates a factory workspace with everything wired: `projects/`, `packages/`, `knowledge/`, `koba.json`, `CLAUDE.md`, Claude Code hooks.
 
-Scans your projects, identifies shared patterns, harvests domain knowledge, and organizes everything into the factory workspace. *(Coming in v0.3)*
+### `koba convert <source> [--dry-run]`
 
-### Check factory health
+Scans an existing monorepo or project directory. Discovers projects and packages, harvests domain knowledge from CLAUDE.md files, detects your stack, and copies everything into the factory workspace. Use `--dry-run` to preview without copying.
 
-```bash
-koba status
-```
+### `koba new <name> [-t web|api|ios|pipeline|other]`
 
-### Search knowledge
+Creates a new project with the right scaffold for its type. Generates `package.json`, `CLAUDE.md`, and tells you how many knowledge entries will be injected on your next session.
 
-```bash
-koba knowledge search "sqlite cloud run"
-koba knowledge stats
-koba knowledge rebuild
-```
+### `koba scan`
 
-### Scan for patterns
+Re-analyzes all projects. Detects frameworks, counts shared package usage, and regenerates the auto-generated sections of CLAUDE.md (stack, project table, package list, knowledge domains).
 
-```bash
-koba scan
-```
+### `koba status`
+
+Factory dashboard: project count, package count, knowledge stats, session metrics, stale knowledge warnings.
+
+### `koba knowledge search|rebuild|stats`
+
+Search the knowledge base, rebuild the FTS5 index from markdown files, or view stats by domain.
 
 ## How It Works
 
@@ -57,43 +58,37 @@ Koba uses Claude Code to do the heavy lifting. The CLI provides structure — wo
 
 **Knowledge capture:** At session end, new knowledge is proposed. You approve or reject.
 
-**Shared code extraction:** When koba finds the same pattern in 3+ projects, it recommends extracting a shared package.
+**CLAUDE.md as OS:** The workspace CLAUDE.md is auto-generated from factory state. User-written sections (how you work, your principles) are preserved across regeneration. Everything else updates when you run `koba scan`.
 
 ## What's Built
 
 | Component | Status |
 |-----------|--------|
-| `koba init` — create factory workspace | Working |
-| `koba status` — factory dashboard | Working |
-| `koba scan` — project analysis | Working |
-| `koba knowledge` — search, rebuild, stats | Working |
-| `koba _hook` — Claude Code hook integration | Working |
-| Knowledge store (FTS5 search) | Working |
+| `koba init` | Working |
+| `koba convert` | Working |
+| `koba new` | Working |
+| `koba scan` + CLAUDE.md regeneration | Working |
+| `koba status` | Working |
+| `koba knowledge` search/rebuild/stats | Working |
+| `koba _hook` session-start/stop | Working |
+| Knowledge store (SQLite FTS5) | Working |
+| Knowledge harvester (CLAUDE.md + DOMAIN_KNOWLEDGE.md) | Working |
+| Project discovery + package adoption | Working |
 | Session analytics | Working |
-| Test suite | 49 tests passing |
-
-## What's Next
-
-| Feature | Version |
-|---------|---------|
-| `koba convert` — ingest existing monorepo | v0.3 |
-| Deep scanner (source-level analysis via Claude Code) | v0.3 |
-| `koba new` — create projects from templates | v0.4 |
-| CLAUDE.md auto-regeneration | v0.4 |
+| Test suite | 61 tests passing |
 
 ## Stack
 
 - TypeScript, Node 22, ESM
 - SQLite + FTS5 (knowledge search)
-- Claude Code hooks
+- Claude Code hooks (SessionStart, Stop)
 - pnpm workspaces
+- commander (CLI)
 
 ## Docs
 
-- [v2 Design Spec](docs/2026-03-26-koba-v2-spec.md) — full architecture
-- [Original Factory Spec](docs/the-factory-spec.md) — thesis, PDLC, metrics
-- [Phase 0 Plan](docs/2026-03-26-factory-phase-0-plan.md)
-- [Sub-Project 1 Plan](docs/2026-03-26-sub1-cli-init-plan.md)
+- [Design Spec](docs/2026-03-26-koba-v2-spec.md) — full architecture, Claude Code as intelligence layer
+- [Factory Spec](docs/the-factory-spec.md) — thesis, PDLC, metrics, panel validation
 
 ## License
 

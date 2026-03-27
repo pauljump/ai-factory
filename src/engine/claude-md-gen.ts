@@ -1,8 +1,6 @@
 import { readFileSync, existsSync, readdirSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
 import type { WorkspacePaths } from '../workspace.js'
-import type { ProjectScan } from './types.js'
-import type { KnowledgeEntry } from './types.js'
+import type { ProjectScan, KnowledgeEntry } from './types.js'
 
 /**
  * Regenerate the auto-generated sections of CLAUDE.md

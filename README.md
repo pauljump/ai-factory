@@ -1,94 +1,121 @@
-# Koba
+# AI Factory
 
-A CLI tool that turns a collection of projects into a compounding production environment.
+A CLI tool that turns a collection of projects into a compounding production environment — where every project you ship makes the next one faster.
 
-**The thesis:** AI alone produces prototypes. AI + a compounding system produces production-grade software at scale.
+**The thesis:** AI coding agents produce prototypes. AI + a compounding knowledge system produces production-grade software at scale. The difference is institutional memory.
+
+## What It Does
+
+AI Factory analyzes your existing projects, extracts knowledge (architecture decisions, gotchas, conventions, playbooks), stores it in a searchable knowledge base, and automatically injects relevant context into every new coding session. The result: session 50 is fundamentally different from session 1.
+
+```
+┌─────────────┐     ┌──────────────┐     ┌─────────────────┐
+│  Your Code   │────▶│  Knowledge    │────▶│  Session        │
+│  (projects)  │     │  Store (FTS5) │     │  Injection      │
+└─────────────┘     └──────────────┘     └─────────────────┘
+       │                    │                      │
+   conventions          playbooks            AI coding agent
+   gotchas              soul/style           gets full context
+   architecture         research             before writing code
+```
 
 ## Install
 
 ```bash
-npm install -g koba
+git clone https://github.com/pauljump/ai-factory.git
+cd ai-factory
+npm install
+npm link    # makes `factory` available globally
 ```
 
 ## Quick Start
 
 ```bash
 # Create a new factory workspace
-koba init my-factory
+factory init my-factory
 cd my-factory
 
 # Import your existing projects
-koba convert ~/path/to/your/monorepo
+factory convert ~/path/to/your/monorepo
 
 # Or start a new project from scratch
-koba new my-app -t api
+factory new my-app -t api
 ```
 
 ## Commands
 
-### `koba init [name]`
-
-Creates a factory workspace with everything wired: `projects/`, `packages/`, `knowledge/`, `koba.json`, `CLAUDE.md`, Claude Code hooks.
-
-### `koba convert <source> [--dry-run]`
-
-Scans an existing monorepo or project directory. Discovers projects and packages, harvests domain knowledge from CLAUDE.md files, detects your stack, and copies everything into the factory workspace. Use `--dry-run` to preview without copying.
-
-### `koba new <name> [-t web|api|ios|pipeline|other]`
-
-Creates a new project with the right scaffold for its type. Generates `package.json`, `CLAUDE.md`, and tells you how many knowledge entries will be injected on your next session.
-
-### `koba scan`
-
-Re-analyzes all projects. Detects frameworks, counts shared package usage, and regenerates the auto-generated sections of CLAUDE.md (stack, project table, package list, knowledge domains).
-
-### `koba status`
-
-Factory dashboard: project count, package count, knowledge stats, session metrics, stale knowledge warnings.
-
-### `koba knowledge search|rebuild|stats`
-
-Search the knowledge base, rebuild the FTS5 index from markdown files, or view stats by domain.
+| Command | What it does |
+|---------|-------------|
+| `factory init [name]` | Creates a workspace with knowledge store, hooks, and auto-generated CLAUDE.md |
+| `factory convert <source>` | Scans existing projects — discovers frameworks, harvests knowledge, copies playbooks, seeds the soul file. Use `--dry-run` to preview. |
+| `factory new <name> [-t type]` | Creates a new project (`web`, `api`, `ios`, `pipeline`, `other`) with relevant knowledge pre-loaded |
+| `factory scan` | Re-analyzes all projects, regenerates auto-sections of CLAUDE.md |
+| `factory status` | Factory dashboard — projects, packages, knowledge stats, session metrics, stale warnings |
+| `factory knowledge <action>` | `search <query>`, `rebuild` the FTS5 index, or view `stats` by domain |
+| `factory eval` | Run retrieval evaluation — scores knowledge retrieval quality with precision, recall, and MRR metrics |
 
 ## How It Works
 
-Koba uses Claude Code to do the heavy lifting. The CLI provides structure — workspace layout, knowledge store, hooks. Claude Code provides intelligence — pattern recognition, knowledge harvesting, code extraction.
+### Knowledge Harvesting
 
-**SessionStart hook:** Every Claude Code session gets relevant knowledge injected automatically based on what project you're in.
+When you run `factory convert`, the system reads every project's CLAUDE.md, domain knowledge files, and playbooks. It extracts structured knowledge entries — each tagged with domain, confidence level, source project, and verification date. These are stored in SQLite with FTS5 full-text indexing.
 
-**Knowledge capture:** At session end, new knowledge is proposed. You approve or reject.
+### Session Injection
 
-**CLAUDE.md as OS:** The workspace CLAUDE.md is auto-generated from factory state. User-written sections (how you work, your principles) are preserved across regeneration. Everything else updates when you run `koba scan`.
+Claude Code hooks fire on every session start. The injection engine:
+1. Detects which project you're in (from package.json, project.yml, Dockerfile)
+2. Loads the soul file (collaboration style, principles)
+3. Matches relevant playbooks by tag
+4. Retrieves knowledge entries — prioritizing same-project entries, then tag matches, then full-text search
+5. Injects a formatted context payload into the session
 
-## What's Built
+### CLAUDE.md Regeneration
 
-| Component | Status |
-|-----------|--------|
-| `koba init` | Working |
-| `koba convert` | Working |
-| `koba new` | Working |
-| `koba scan` + CLAUDE.md regeneration | Working |
-| `koba status` | Working |
-| `koba knowledge` search/rebuild/stats | Working |
-| `koba _hook` session-start/stop | Working |
-| Knowledge store (SQLite FTS5) | Working |
-| Knowledge harvester (CLAUDE.md + DOMAIN_KNOWLEDGE.md) | Working |
-| Project discovery + package adoption | Working |
-| Session analytics | Working |
-| Test suite | 61 tests passing |
+`factory scan` auto-generates sections of your workspace CLAUDE.md (stack, project table, package list, knowledge domains, factory health) while preserving your hand-written sections (how you work, what not to build). Uses `<!-- factory:auto-start -->` / `<!-- factory:user-start -->` markers.
 
-## Stack
+### Retrieval Evaluation
+
+`factory eval` runs a suite of test cases against your knowledge store, measuring:
+- **Precision** — what fraction of retrieved entries are actually relevant?
+- **Recall** — what fraction of relevant entries were retrieved?
+- **MRR** (Mean Reciprocal Rank) — how high does the first relevant result rank?
+
+Scorecards are saved to `scorecards/` so you can track retrieval quality as your knowledge base grows.
+
+## Architecture
+
+```
+src/
+├── commands/          # CLI commands (init, convert, new, scan, status, knowledge, eval)
+├── engine/            # Core logic
+│   ├── knowledge-store.ts   # SQLite FTS5 knowledge indexing + retrieval
+│   ├── inject-knowledge.ts  # Session context injection engine
+│   ├── eval.ts              # Retrieval evaluation harness
+│   ├── harvester.ts         # Knowledge extraction from CLAUDE.md files
+│   ├── scanner.ts           # Project framework/dependency detection
+│   ├── claude-md-gen.ts     # Auto-regeneration of CLAUDE.md sections
+│   ├── baseline.ts          # Git history analysis (sessions, deploy timing)
+│   └── ...
+├── lib/
+│   ├── search.ts            # FTS5 search with BM25 ranking
+│   └── analytics.ts         # Session event tracking
+└── templates/               # Generated file templates (CLAUDE.md, hooks, config)
+
+tests/                 # 76+ tests covering all commands and engine modules
+```
+
+## Built With
 
 - TypeScript, Node 22, ESM
-- SQLite + FTS5 (knowledge search)
+- SQLite + FTS5 (knowledge search with BM25 ranking)
 - Claude Code hooks (SessionStart, Stop)
-- pnpm workspaces
-- commander (CLI)
+- commander (CLI framework)
+- Vitest (test framework)
 
-## Docs
+## Design Docs
 
 - [Design Spec](docs/2026-03-26-koba-v2-spec.md) — full architecture, Claude Code as intelligence layer
-- [Factory Spec](docs/the-factory-spec.md) — thesis, PDLC, metrics, panel validation
+- [Factory Spec](docs/the-factory-spec.md) — thesis, product development lifecycle, validation metrics
 
 ## License
 

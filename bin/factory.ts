@@ -77,4 +77,12 @@ program
     await hookCommand(event, opts.cwd)
   })
 
+program
+  .command('eval')
+  .description('Evaluate knowledge retrieval quality')
+  .action(async () => {
+    const { evalCommand } = await import('../src/commands/eval.js')
+    await evalCommand()
+  })
+
 program.parse()

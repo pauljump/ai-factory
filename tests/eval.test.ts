@@ -3,6 +3,7 @@ import Database from 'better-sqlite3'
 import { initFactoryDb } from '../src/engine/db.js'
 import { createKnowledgeStore } from '../src/engine/knowledge-store.js'
 import { runEvalCase, runEvalSuite, generateScorecard } from '../src/engine/eval.js'
+import { BUILTIN_EVAL_CASES, resolveEvalCases } from '../src/engine/eval-cases.js'
 import type { KnowledgeEntry, EvalCase } from '../src/engine/types.js'
 
 function makeEntry(id: string, domain: string, tags: string[], body: string): KnowledgeEntry {
@@ -131,5 +132,30 @@ describe('generateScorecard', () => {
     expect(markdown).toContain('Precision')
     expect(markdown).toContain('Recall')
     expect(markdown).toContain('MRR')
+  })
+})
+
+describe('eval-cases', () => {
+  it('has built-in cases', () => {
+    expect(BUILTIN_EVAL_CASES.length).toBeGreaterThan(0)
+    for (const c of BUILTIN_EVAL_CASES) {
+      expect(c.id).toBeTruthy()
+      expect(c.query).toBeTruthy()
+    }
+  })
+
+  it('resolves cases with empty relevantIds from tag search', () => {
+    const cases: EvalCase[] = [
+      { id: 'c1', query: 'test', relevantIds: [], tags: ['sqlite'] },
+      { id: 'c2', query: 'test', relevantIds: ['already-set'], tags: ['ios'] },
+    ]
+
+    const resolved = resolveEvalCases(cases, (tags) => {
+      if (tags.includes('sqlite')) return [{ id: 'sqlite-entry-1' }, { id: 'sqlite-entry-2' }]
+      return []
+    })
+
+    expect(resolved[0]!.relevantIds).toEqual(['sqlite-entry-1', 'sqlite-entry-2'])
+    expect(resolved[1]!.relevantIds).toEqual(['already-set'])
   })
 })

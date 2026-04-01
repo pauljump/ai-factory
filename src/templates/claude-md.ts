@@ -1,69 +1,69 @@
 export function generateClaudeMd(name: string): string {
-  return `# ${name} — Koba Factory
+  return `# ${name} — AI Factory
 
 Read soul.md first, then this file, every session.
 
-<!-- koba:user-start:how-we-work -->
+<!-- factory:user-start:how-we-work -->
 ## How We Work
 
-[Describe how you work here. This section is yours — koba will never overwrite it.]
+[Describe how you work here. This section is yours — factory will never overwrite it.]
 
-<!-- koba:user-end:how-we-work -->
+<!-- factory:user-end:how-we-work -->
 
-<!-- koba:user-start:what-not-to-build -->
+<!-- factory:user-start:what-not-to-build -->
 ## What NOT to Build
 
-[Your constraints go here. koba will never overwrite this.]
+[Your constraints go here. factory will never overwrite this.]
 
-<!-- koba:user-end:what-not-to-build -->
+<!-- factory:user-end:what-not-to-build -->
 
-<!-- koba:auto-start:conventions -->
+<!-- factory:auto-start:conventions -->
 ## Factory Conventions
 
-Run \`koba scan\` to detect conventions across projects.
+Run \`factory scan\` to detect conventions across projects.
 
-<!-- koba:auto-end:conventions -->
+<!-- factory:auto-end:conventions -->
 
-<!-- koba:auto-start:stack -->
+<!-- factory:auto-start:stack -->
 ## Stack
 
-Run \`koba scan\` to populate this section.
+Run \`factory scan\` to populate this section.
 
-<!-- koba:auto-end:stack -->
+<!-- factory:auto-end:stack -->
 
-<!-- koba:auto-start:active-projects -->
+<!-- factory:auto-start:active-projects -->
 ## Active Projects
 
-Run \`koba scan\` to populate this section.
+Run \`factory scan\` to populate this section.
 
-<!-- koba:auto-end:active-projects -->
+<!-- factory:auto-end:active-projects -->
 
-<!-- koba:auto-start:packages -->
+<!-- factory:auto-start:packages -->
 ## Shared Packages
 
-Run \`koba scan\` to populate this section.
+Run \`factory scan\` to populate this section.
 
-<!-- koba:auto-end:packages -->
+<!-- factory:auto-end:packages -->
 
-<!-- koba:auto-start:playbooks -->
+<!-- factory:auto-start:playbooks -->
 ## Playbooks
 
-Run \`koba scan\` to populate this section.
+Run \`factory scan\` to populate this section.
 
-<!-- koba:auto-end:playbooks -->
+<!-- factory:auto-end:playbooks -->
 
-<!-- koba:auto-start:knowledge -->
+<!-- factory:auto-start:knowledge -->
 ## Knowledge Domains
 
-Run \`koba scan\` to populate this section.
+Run \`factory scan\` to populate this section.
 
-<!-- koba:auto-end:knowledge -->
+<!-- factory:auto-end:knowledge -->
 
-<!-- koba:auto-start:health -->
+<!-- factory:auto-start:health -->
 ## Factory Health
 
-Run \`koba scan\` to populate this section.
+Run \`factory scan\` to populate this section.
 
-<!-- koba:auto-end:health -->
+<!-- factory:auto-end:health -->
 `
 }

@@ -4,9 +4,9 @@ import { existsSync, readFileSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 
-const BIN = join(import.meta.dirname, '..', 'bin', 'koba.ts')
+const BIN = join(import.meta.dirname, '..', 'bin', 'factory.ts')
 const TSX = join(import.meta.dirname, '..', 'node_modules', '.bin', 'tsx')
-const testDir = join(tmpdir(), 'koba-test-init')
+const testDir = join(tmpdir(), 'factory-test-init')
 
 function run(...args: string[]): string {
   return execFileSync(TSX, [BIN, ...args], {
@@ -16,7 +16,7 @@ function run(...args: string[]): string {
   }).trim()
 }
 
-describe('koba init', () => {
+describe('factory init', () => {
   beforeEach(() => {
     rmSync(testDir, { recursive: true, force: true })
   })
@@ -24,7 +24,7 @@ describe('koba init', () => {
   it('creates all required directories and files', () => {
     run('init', testDir)
 
-    expect(existsSync(join(testDir, 'koba.json'))).toBe(true)
+    expect(existsSync(join(testDir, 'factory.json'))).toBe(true)
     expect(existsSync(join(testDir, 'CLAUDE.md'))).toBe(true)
     expect(existsSync(join(testDir, 'projects'))).toBe(true)
     expect(existsSync(join(testDir, 'packages'))).toBe(true)
@@ -37,10 +37,10 @@ describe('koba init', () => {
     expect(existsSync(join(testDir, '.gitignore'))).toBe(true)
   })
 
-  it('creates valid koba.json', () => {
+  it('creates valid factory.json', () => {
     run('init', testDir)
-    const config = JSON.parse(readFileSync(join(testDir, 'koba.json'), 'utf-8'))
-    expect(config.name).toBe('koba-test-init')
+    const config = JSON.parse(readFileSync(join(testDir, 'factory.json'), 'utf-8'))
+    expect(config.name).toBe('factory-test-init')
     expect(config.version).toBe('1.0.0')
     expect(config.stack).toBeDefined()
     expect(config.scan).toBeDefined()
@@ -49,9 +49,9 @@ describe('koba init', () => {
   it('creates CLAUDE.md with factory markers', () => {
     run('init', testDir)
     const content = readFileSync(join(testDir, 'CLAUDE.md'), 'utf-8')
-    expect(content).toContain('Koba Factory')
-    expect(content).toContain('koba:user-start')
-    expect(content).toContain('koba:auto-start')
+    expect(content).toContain('AI Factory')
+    expect(content).toContain('factory:user-start')
+    expect(content).toContain('factory:auto-start')
   })
 
   it('wires hooks in .claude/settings.json', () => {

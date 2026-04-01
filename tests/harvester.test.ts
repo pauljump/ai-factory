@@ -83,7 +83,7 @@ Run npm install to get started.
 
 ## Usage
 
-Call the CLI with koba run.
+Call the CLI with factory run.
 `
     const entries = harvestFromClaudeMd('boring-project', content)
     expect(entries).toEqual([])

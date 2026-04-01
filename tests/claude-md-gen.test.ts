@@ -6,7 +6,7 @@ import { regenerateClaudeMd } from '../src/engine/claude-md-gen.js'
 import type { WorkspacePaths } from '../src/workspace.js'
 import type { ProjectScan, KnowledgeEntry } from '../src/engine/types.js'
 
-const testDir = join(tmpdir(), 'koba-test-claudemd')
+const testDir = join(tmpdir(), 'factory-test-claudemd')
 
 function makeWs(): WorkspacePaths {
   return {
@@ -16,7 +16,7 @@ function makeWs(): WorkspacePaths {
     knowledge: join(testDir, 'knowledge'),
     data: join(testDir, 'data'),
     scorecards: join(testDir, 'scorecards'),
-    config: join(testDir, 'koba.json'),
+    config: join(testDir, 'factory.json'),
     db: join(testDir, 'data', 'factory.db'),
     claudeMd: join(testDir, 'CLAUDE.md'),
   }
@@ -26,7 +26,7 @@ describe('regenerateClaudeMd', () => {
   beforeEach(() => {
     rmSync(testDir, { recursive: true, force: true })
     mkdirSync(join(testDir, 'packages', 'api-kit'), { recursive: true })
-    writeFileSync(join(testDir, 'koba.json'), JSON.stringify({
+    writeFileSync(join(testDir, 'factory.json'), JSON.stringify({
       stack: { supported: ['nextjs', 'fastify'] },
     }))
   })
@@ -34,40 +34,40 @@ describe('regenerateClaudeMd', () => {
   it('updates auto sections while preserving user sections', () => {
     writeFileSync(join(testDir, 'CLAUDE.md'), `# Test Factory
 
-<!-- koba:user-start:how-we-work -->
+<!-- factory:user-start:how-we-work -->
 ## How We Work
 
 My custom content here.
 
-<!-- koba:user-end:how-we-work -->
+<!-- factory:user-end:how-we-work -->
 
-<!-- koba:auto-start:stack -->
+<!-- factory:auto-start:stack -->
 ## Stack
 
 Old stack content.
 
-<!-- koba:auto-end:stack -->
+<!-- factory:auto-end:stack -->
 
-<!-- koba:auto-start:active-projects -->
+<!-- factory:auto-start:active-projects -->
 ## Active Projects
 
 Old projects.
 
-<!-- koba:auto-end:active-projects -->
+<!-- factory:auto-end:active-projects -->
 
-<!-- koba:auto-start:packages -->
+<!-- factory:auto-start:packages -->
 ## Shared Packages
 
 Old packages.
 
-<!-- koba:auto-end:packages -->
+<!-- factory:auto-end:packages -->
 
-<!-- koba:auto-start:knowledge -->
+<!-- factory:auto-start:knowledge -->
 ## Knowledge Domains
 
 Old knowledge.
 
-<!-- koba:auto-end:knowledge -->
+<!-- factory:auto-end:knowledge -->
 `)
 
     const scans: ProjectScan[] = [{

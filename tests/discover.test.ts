@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 
 describe('discoverSource', () => {
-  const testDir = join(tmpdir(), 'koba-discover-test')
+  const testDir = join(tmpdir(), 'factory-discover-test')
 
   function setup(files: Record<string, string>) {
     rmSync(testDir, { recursive: true, force: true })

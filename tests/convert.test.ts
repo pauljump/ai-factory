@@ -4,10 +4,10 @@ import { existsSync, readFileSync, mkdirSync, writeFileSync, rmSync } from 'node
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 
-const BIN = join(import.meta.dirname, '..', 'bin', 'koba.ts')
+const BIN = join(import.meta.dirname, '..', 'bin', 'factory.ts')
 const TSX = join(import.meta.dirname, '..', 'node_modules', '.bin', 'tsx')
-const workspaceDir = join(tmpdir(), 'koba-test-convert-ws')
-const sourceDir = join(tmpdir(), 'koba-test-convert-src')
+const workspaceDir = join(tmpdir(), 'factory-test-convert-ws')
+const sourceDir = join(tmpdir(), 'factory-test-convert-src')
 
 function run(...args: string[]): string {
   return execFileSync(TSX, [BIN, ...args], {
@@ -17,7 +17,7 @@ function run(...args: string[]): string {
   }).trim()
 }
 
-describe('koba convert', () => {
+describe('factory convert', () => {
   beforeEach(() => {
     rmSync(workspaceDir, { recursive: true, force: true })
     rmSync(sourceDir, { recursive: true, force: true })
@@ -63,9 +63,9 @@ describe('koba convert', () => {
     expect(existsSync(knowledgeDir)).toBe(true)
   })
 
-  it('updates koba.json with detected stack', () => {
+  it('updates factory.json with detected stack', () => {
     run('convert', sourceDir)
-    const config = JSON.parse(readFileSync(join(workspaceDir, 'koba.json'), 'utf-8'))
+    const config = JSON.parse(readFileSync(join(workspaceDir, 'factory.json'), 'utf-8'))
     expect(config.stack.supported.length).toBeGreaterThan(0)
   })
 

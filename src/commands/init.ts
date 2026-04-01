@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync, chmodSync } from 'node:fs'
 import { join, basename, resolve } from 'node:path'
-import { generateKobaConfig } from '../templates/koba-config.js'
+import { generateFactoryConfig } from '../templates/factory-config.js'
 import { generateClaudeMd } from '../templates/claude-md.js'
 import { generateSessionStartHook, generateStopHook } from '../templates/hooks.js'
 
@@ -8,8 +8,8 @@ export async function initCommand(target?: string): Promise<void> {
   const dir = resolve(target ?? '.')
   const name = basename(dir)
 
-  if (existsSync(join(dir, 'koba.json'))) {
-    console.error(`Error: ${dir} is already a koba workspace.`)
+  if (existsSync(join(dir, 'factory.json'))) {
+    console.error(`Error: ${dir} is already a factory workspace.`)
     process.exit(1)
   }
 
@@ -20,8 +20,8 @@ export async function initCommand(target?: string): Promise<void> {
     mkdirSync(join(dir, d), { recursive: true })
   }
 
-  writeFileSync(join(dir, 'koba.json'), JSON.stringify(generateKobaConfig(name), null, 2) + '\n')
-  console.log('  \u2713 koba.json')
+  writeFileSync(join(dir, 'factory.json'), JSON.stringify(generateFactoryConfig(name), null, 2) + '\n')
+  console.log('  \u2713 factory.json')
 
   writeFileSync(join(dir, 'CLAUDE.md'), generateClaudeMd(name))
   console.log('  \u2713 CLAUDE.md')
@@ -71,6 +71,6 @@ export async function initCommand(target?: string): Promise<void> {
 
   console.log(`\nFactory ready. Next steps:`)
   console.log(`  cd ${dir}`)
-  console.log(`  koba convert ~/path/to/existing/projects   # import existing work`)
-  console.log(`  koba new my-first-project                  # or start fresh`)
+  console.log(`  factory convert ~/path/to/existing/projects   # import existing work`)
+  console.log(`  factory new my-first-project                  # or start fresh`)
 }

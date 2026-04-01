@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { extractConventions, formatConventions } from '../src/engine/conventions.js'
 import type { DiscoveredProject } from '../src/engine/types.js'
 
-const testDir = join(tmpdir(), 'koba-test-conventions')
+const testDir = join(tmpdir(), 'factory-test-conventions')
 
 function makeProject(name: string, claudeContent?: string): DiscoveredProject {
   const dir = join(testDir, name)

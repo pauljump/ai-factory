@@ -3,7 +3,7 @@ import type { Playbook } from './types.js'
 const TODAY = new Date().toISOString().slice(0, 10)
 
 /**
- * Generalized playbook templates that ship with Koba.
+ * Generalized playbook templates that ship with the AI Factory.
  * These get activated and populated based on detected project patterns.
  */
 export const PLAYBOOK_TEMPLATES: Playbook[] = [

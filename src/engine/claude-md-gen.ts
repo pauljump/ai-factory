@@ -8,7 +8,7 @@ import { extractConventions, formatConventions } from './conventions.js'
 
 /**
  * Regenerate the auto-generated sections of CLAUDE.md.
- * Preserves everything between koba:user-start and koba:user-end markers.
+ * Preserves everything between factory:user-start and factory:user-end markers.
  */
 export function regenerateClaudeMd(
   ws: WorkspacePaths,
@@ -46,8 +46,8 @@ export function regenerateClaudeMd(
 }
 
 function replaceAutoSection(content: string, name: string, newContent: string): string {
-  const startMarker = `<!-- koba:auto-start:${name} -->`
-  const endMarker = `<!-- koba:auto-end:${name} -->`
+  const startMarker = `<!-- factory:auto-start:${name} -->`
+  const endMarker = `<!-- factory:auto-end:${name} -->`
 
   const startIdx = content.indexOf(startMarker)
   const endIdx = content.indexOf(endMarker)
@@ -65,13 +65,13 @@ function generateStackSection(config: Record<string, unknown>): string {
   if (!stack) return '## Stack\n\nNo stack configured.\n'
 
   const supported = (stack['supported'] as string[]) ?? []
-  if (supported.length === 0) return '## Stack\n\nRun `koba convert` to detect your stack.\n'
+  if (supported.length === 0) return '## Stack\n\nRun `factory convert` to detect your stack.\n'
 
   return '## Stack\n\n' + supported.map(s => `- ${s}`).join('\n') + '\n'
 }
 
 function generateProjectsSection(scans: ProjectScan[]): string {
-  if (scans.length === 0) return '## Active Projects\n\nNo projects yet. Run `koba new <name>` to create one.\n'
+  if (scans.length === 0) return '## Active Projects\n\nNo projects yet. Run `factory new <name>` to create one.\n'
 
   const lines = ['## Active Projects\n']
   lines.push('| Project | Framework | Packages | Deploy |')

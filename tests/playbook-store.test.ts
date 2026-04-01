@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { loadPlaybooks, writePlaybook, matchPlaybooks } from '../src/engine/playbook-store.js'
 import type { Playbook } from '../src/engine/types.js'
 
-const testDir = join(tmpdir(), 'koba-test-playbooks')
+const testDir = join(tmpdir(), 'factory-test-playbooks')
 
 beforeEach(() => {
   rmSync(testDir, { recursive: true, force: true })
@@ -59,6 +59,6 @@ describe('playbook store', () => {
   })
 
   it('returns empty for nonexistent directory', () => {
-    expect(loadPlaybooks('/tmp/does-not-exist-koba')).toEqual([])
+    expect(loadPlaybooks('/tmp/does-not-exist-factory')).toEqual([])
   })
 })

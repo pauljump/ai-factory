@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
 
-const BIN = join(import.meta.dirname, '..', 'bin', 'koba.ts')
+const BIN = join(import.meta.dirname, '..', 'bin', 'factory.ts')
 const TSX = join(import.meta.dirname, '..', 'node_modules', '.bin', 'tsx')
 
 function run(...args: string[]): string {
@@ -12,7 +12,7 @@ function run(...args: string[]): string {
   }).trim()
 }
 
-describe('koba CLI', () => {
+describe('factory CLI', () => {
   it('prints version with --version', () => {
     const output = run('--version')
     expect(output).toMatch(/^\d+\.\d+\.\d+$/)
@@ -20,7 +20,7 @@ describe('koba CLI', () => {
 
   it('prints help with --help', () => {
     const output = run('--help')
-    expect(output).toContain('koba')
+    expect(output).toContain('factory')
     expect(output).toContain('init')
   })
 })

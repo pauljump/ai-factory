@@ -117,7 +117,7 @@ function generateProjectClaudeMd(name: string, type: string): string {
 
   return `# ${name}
 
-${typeDescriptions[type] ?? 'Project'} — part of the koba factory.
+${typeDescriptions[type] ?? 'Project'} — part of the factory.
 
 ## Current State
 

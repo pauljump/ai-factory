@@ -1,4 +1,4 @@
-export function generateKobaConfig(name: string): object {
+export function generateFactoryConfig(name: string): object {
   return {
     name,
     version: '1.0.0',

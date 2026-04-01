@@ -10,7 +10,7 @@ export async function knowledgeCommand(action: string, query?: string): Promise<
 
   if (action === 'search') {
     if (!query) {
-      console.error('Usage: koba knowledge search <query>')
+      console.error('Usage: factory knowledge search <query>')
       process.exit(1)
     }
     const db = openFactoryDb(ws.db)

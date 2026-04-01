@@ -1,15 +1,16 @@
 {
-  "name": "koba",
+  "name": "ai-factory",
   "version": "0.2.0",
   "type": "module",
-  "description": "The Factory — AI-powered compounding production system",
+  "description": "AI Factory — a compounding production system for shipping software with AI coding agents",
   "bin": {
-    "koba": "./bin/koba.ts"
+    "factory": "./bin/factory.ts"
   },
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "factory": "tsx bin/factory.ts"
   },
   "dependencies": {
     "better-sqlite3": "^11.0.0",

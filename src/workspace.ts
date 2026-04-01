@@ -20,7 +20,7 @@ export function findWorkspaceRoot(startDir: string): string | null {
   let dir = resolve(startDir)
 
   while (true) {
-    if (existsSync(join(dir, 'koba.json'))) {
+    if (existsSync(join(dir, 'factory.json'))) {
       return dir
     }
 
@@ -40,7 +40,7 @@ export function getWorkspacePaths(root: string): WorkspacePaths {
     research: join(root, 'research'),
     data: join(root, 'data'),
     scorecards: join(root, 'scorecards'),
-    config: join(root, 'koba.json'),
+    config: join(root, 'factory.json'),
     db: join(root, 'data', 'factory.db'),
     claudeMd: join(root, 'CLAUDE.md'),
     soul: join(root, 'soul.md'),
@@ -50,7 +50,7 @@ export function getWorkspacePaths(root: string): WorkspacePaths {
 export function requireWorkspace(cwd?: string): WorkspacePaths {
   const root = findWorkspaceRoot(cwd ?? process.cwd())
   if (!root) {
-    console.error('Error: not inside a koba workspace. Run `koba init` first.')
+    console.error('Error: not inside a factory workspace. Run `factory init` first.')
     process.exit(1)
   }
   return getWorkspacePaths(root)

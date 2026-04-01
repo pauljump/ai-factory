@@ -5,12 +5,12 @@ import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 
 describe('findWorkspaceRoot', () => {
-  const testDir = join(tmpdir(), 'koba-test-workspace')
+  const testDir = join(tmpdir(), 'factory-test-workspace')
 
   function setup() {
     rmSync(testDir, { recursive: true, force: true })
     mkdirSync(join(testDir, 'projects', 'my-app'), { recursive: true })
-    writeFileSync(join(testDir, 'koba.json'), JSON.stringify({ name: 'test-factory' }))
+    writeFileSync(join(testDir, 'factory.json'), JSON.stringify({ name: 'test-factory' }))
   }
 
   it('finds workspace root from project subdirectory', () => {
@@ -40,7 +40,7 @@ describe('getWorkspacePaths', () => {
     expect(paths.knowledge).toBe('/fake/root/knowledge')
     expect(paths.data).toBe('/fake/root/data')
     expect(paths.scorecards).toBe('/fake/root/scorecards')
-    expect(paths.config).toBe('/fake/root/koba.json')
+    expect(paths.config).toBe('/fake/root/factory.json')
     expect(paths.db).toBe('/fake/root/data/factory.db')
   })
 })

@@ -104,7 +104,7 @@ export async function statusCommand(): Promise<void> {
       console.log(`  Knowledge captured: ${metrics.totalKnowledgeCaptured} entries`)
     }
   } else {
-    console.log(`Knowledge: not initialized (run koba knowledge rebuild)`)
+    console.log(`Knowledge: not initialized (run factory knowledge rebuild)`)
   }
 
   console.log('')

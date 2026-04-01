@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 import { seedSoul, writeSoul, readSoul } from '../src/engine/soul.js'
 
-const testDir = join(tmpdir(), 'koba-test-soul')
+const testDir = join(tmpdir(), 'factory-test-soul')
 
 beforeEach(() => {
   rmSync(testDir, { recursive: true, force: true })

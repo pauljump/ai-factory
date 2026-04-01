@@ -225,11 +225,11 @@ export async function convertCommand(source: string, dryRun: boolean): Promise<v
     console.log(`  \u2713 ${allKnowledge.length} knowledge entries indexed`)
   }
 
-  // Update koba.json
+  // Update factory.json
   const config = JSON.parse(readFileSync(ws.config, 'utf-8'))
   config.stack.supported = [...frameworks]
   writeFileSync(ws.config, JSON.stringify(config, null, 2) + '\n')
-  console.log(`  \u2713 koba.json updated`)
+  console.log(`  \u2713 factory.json updated`)
 
   // Update pnpm-workspace.yaml
   writeFileSync(join(ws.root, 'pnpm-workspace.yaml'), 'packages:\n  - "packages/*"\n  - "projects/*"\n')

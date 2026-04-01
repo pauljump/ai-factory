@@ -61,7 +61,7 @@ export async function scanCommand(): Promise<void> {
   if (existsSync(ws.soul)) {
     console.log('\nSoul: present')
   } else {
-    console.log('\nSoul: missing (run koba convert to seed)')
+    console.log('\nSoul: missing (run factory convert to seed)')
   }
 
   console.log(`\nResults saved to data/scan-results.json`)

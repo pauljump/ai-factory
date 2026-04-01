@@ -1,6 +1,6 @@
 export function generateSessionStartHook(): string {
   return `#!/usr/bin/env bash
-# Koba SessionStart hook — injects relevant factory knowledge
+# Factory SessionStart hook — injects relevant factory knowledge
 set -euo pipefail
 
 INPUT=$(cat)
@@ -17,13 +17,13 @@ if [ -z "$CWD" ]; then
   CWD="$(pwd)"
 fi
 
-koba _hook session-start --cwd "$CWD"
+factory _hook session-start --cwd "$CWD"
 `
 }
 
 export function generateStopHook(): string {
   return `#!/usr/bin/env bash
-# Koba Stop hook — logs session metrics
+# Factory Stop hook — logs session metrics
 set -euo pipefail
 
 INPUT=$(cat)
@@ -40,6 +40,6 @@ if [ -z "$CWD" ]; then
   CWD="$(pwd)"
 fi
 
-koba _hook stop --cwd "$CWD"
+factory _hook stop --cwd "$CWD"
 `
 }

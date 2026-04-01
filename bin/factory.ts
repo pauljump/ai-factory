@@ -11,8 +11,8 @@ const pkg = JSON.parse(readFileSync(join(__dirname, '..', 'package.json'), 'utf-
 const program = new Command()
 
 program
-  .name('koba')
-  .description('The Factory — AI-powered compounding production system')
+  .name('factory')
+  .description('AI Factory — compounding production system for shipping software with AI coding agents')
   .version(pkg.version)
 
 program

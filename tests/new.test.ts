@@ -4,9 +4,9 @@ import { existsSync, readFileSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 
-const BIN = join(import.meta.dirname, '..', 'bin', 'koba.ts')
+const BIN = join(import.meta.dirname, '..', 'bin', 'factory.ts')
 const TSX = join(import.meta.dirname, '..', 'node_modules', '.bin', 'tsx')
-const testDir = join(tmpdir(), 'koba-test-new')
+const testDir = join(tmpdir(), 'factory-test-new')
 
 function run(...args: string[]): string {
   return execFileSync(TSX, [BIN, ...args], {
@@ -16,7 +16,7 @@ function run(...args: string[]): string {
   }).trim()
 }
 
-describe('koba new', () => {
+describe('factory new', () => {
   beforeEach(() => {
     rmSync(testDir, { recursive: true, force: true })
     // Init workspace first

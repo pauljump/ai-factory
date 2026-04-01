@@ -175,3 +175,49 @@ export interface Soul {
   /** Full rendered markdown */
   body: string
 }
+
+/** A test case for evaluating knowledge retrieval quality */
+export interface EvalCase {
+  /** Unique test case ID */
+  id: string
+  /** The search query to run against the knowledge store */
+  query: string
+  /** IDs of knowledge entries that SHOULD be retrieved for this query */
+  relevantIds: string[]
+  /** Optional tags to also search by */
+  tags?: string[]
+}
+
+/** Result of running one eval case against the knowledge store */
+export interface EvalResult {
+  /** Which test case this result is for */
+  caseId: string
+  /** The query that was run */
+  query: string
+  /** IDs of entries actually retrieved (in rank order) */
+  retrievedIds: string[]
+  /** IDs of entries that should have been retrieved */
+  relevantIds: string[]
+  /** Precision: |retrieved ∩ relevant| / |retrieved| */
+  precision: number
+  /** Recall: |retrieved ∩ relevant| / |relevant| */
+  recall: number
+  /** Reciprocal rank: 1 / position of first relevant result (0 if none) */
+  reciprocalRank: number
+}
+
+/** Aggregated scorecard from running all eval cases */
+export interface EvalScorecard {
+  /** When this eval was run */
+  timestamp: string
+  /** Total number of test cases */
+  totalCases: number
+  /** Mean precision across all cases */
+  meanPrecision: number
+  /** Mean recall across all cases */
+  meanRecall: number
+  /** Mean reciprocal rank across all cases */
+  meanReciprocalRank: number
+  /** Individual case results */
+  results: EvalResult[]
+}

@@ -116,6 +116,15 @@ tests/                 # 76+ tests covering all commands and engine modules
 
 This tool runs a production monorepo with 16 active projects across iOS, web, and backend — including data pipelines, prediction market feeds, a persona simulation engine, and consumer apps on TestFlight. The knowledge store currently holds architecture decisions, deploy playbooks, and cross-project patterns that make launching a new app a single-session operation.
 
+Related projects extracted from the same monorepo:
+- **[kits](https://github.com/pauljump/kits)** — 11 composable backend packages (search, analytics, job queues, payments, etc.) that the factory manages
+- **[teek](https://github.com/pauljump/teek)** — persona simulation engine used by the factory's AI agent ecosystem
+- **[polyfeeds](https://github.com/pauljump/polyfeeds)** — 106 data feeds for prediction markets, one of the apps the factory powers
+
+## Context
+
+These repos are recent because the work isn't. Everything here was built inside a private monorepo over months of daily shipping — 16 apps, 21 shared packages, hundreds of commits. I'm open-sourcing the pieces that turned out to be genuinely reusable, both to maintain them properly as standalone tools and because they solved problems I couldn't find good existing solutions for. This is a personal engineering exercise, not a plea for community contributions.
+
 ## Design Docs
 
 - [Design Spec](docs/2026-03-26-koba-v2-spec.md) — full architecture, Claude Code as intelligence layer

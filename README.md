@@ -1,12 +1,12 @@
 # AI Factory
 
-A CLI tool that turns a collection of projects into a compounding production environment — where every project you ship makes the next one faster.
+**The problem with AI coding agents isn't intelligence — it's amnesia.**
 
-**The thesis:** AI coding agents produce prototypes. AI + a compounding knowledge system produces production-grade software at scale. The difference is institutional memory.
+Every session starts from zero. The agent doesn't know that you tried approach X last week and it failed, that module Y has a subtle invariant, or that the deploy requires a flag nobody documented. You re-explain the same context, hit the same walls, and wonder why session 50 doesn't feel faster than session 1.
 
-## What It Does
+AI Factory fixes this. It's a CLI that builds a persistent knowledge layer across your projects — harvesting architecture decisions, gotchas, conventions, and playbooks into a searchable store, then automatically injecting the right context into every coding session. The result: compounding returns on every hour you invest.
 
-AI Factory analyzes your existing projects, extracts knowledge (architecture decisions, gotchas, conventions, playbooks), stores it in a searchable knowledge base, and automatically injects relevant context into every new coding session. The result: session 50 is fundamentally different from session 1.
+I built this to run my own monorepo (16 apps, 21 shared packages, TypeScript + Swift). It went from "explain the deploy process every session" to "the agent already knows."
 
 ```
 ┌─────────────┐     ┌──────────────┐     ┌─────────────────┐
@@ -111,6 +111,10 @@ tests/                 # 76+ tests covering all commands and engine modules
 - Claude Code hooks (SessionStart, Stop)
 - commander (CLI framework)
 - Vitest (test framework)
+
+## What It Powers
+
+This tool runs a production monorepo with 16 active projects across iOS, web, and backend — including data pipelines, prediction market feeds, a persona simulation engine, and consumer apps on TestFlight. The knowledge store currently holds architecture decisions, deploy playbooks, and cross-project patterns that make launching a new app a single-session operation.
 
 ## Design Docs
 

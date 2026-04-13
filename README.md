@@ -133,3 +133,7 @@ These repos are recent because the work isn't. Everything here was built inside 
 ## License
 
 MIT
+
+---
+
+**Part of a larger system.** See [pauljump/portfolio](https://github.com/pauljump/portfolio) for the full picture — 16 production apps, shared infrastructure, and the factory that builds them.
